@@ -1,0 +1,16 @@
+.title_table{
+    font-family: Calibri Light; 
+    font-weight:bold;
+    border-radius:6px; 
+    margin-bottom: -2px;
+}
+.text_title_date{
+    margin-left: 10px;
+}
+table{
+    font-family: Calibri Light;
+}
+.btn_load_more{
+    width:150px; 
+    margin: 4px;
+}
