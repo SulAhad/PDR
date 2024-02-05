@@ -21,6 +21,18 @@ if(isset($_SESSION['login']) == "") {
         $target_utility_water = $row['target_utility_water'];
     }
     
+    $message_electricity = "SELECT DATE(date) AS day, SUM(xls6 + xls7 + xls8 + xls9 + xls10 + xls11 + xls12 + xls23) as sulfy FROM electricity WHERE DATE(date) = '$date' GROUP BY day;";
+    $result_table_electricity_sulf =  mysqli_query($link, $message_electricity);
+    while ($row_sulfy = mysqli_fetch_assoc($result_table_electricity_sulf)) {
+        $electricity_sulfy = $row_sulfy['sulfy'];
+    }
+
+    $message_electricity_warehouse = "SELECT DATE(date) AS day, SUM(xls12 + xls13 + xls16) as sgp FROM electricity WHERE DATE(date) = '$date' GROUP BY day;";
+    $result_table_electricity_warehouse =  mysqli_query($link, $message_electricity_warehouse);
+    while ($row_warehouse = mysqli_fetch_assoc($result_table_electricity_warehouse)) {
+        $electricity_warehouse = $row_warehouse['sgp'];
+    }
+
     $message_table_energoresurs = "SELECT DATE(date) AS day,
     sum(current_total_energy) AS current_total_energy,
     sum(day_total_energy) AS day_total_energy,
@@ -100,14 +112,14 @@ if(isset($_SESSION['login']) == "") {
         echo '<td>' . $target_sulfirovanie_energy . '</td>';
         echo '<td>' . $row_table_energoresurs['current_sulfirovanie_energy'] . '</td>';
         echo '<td>' . round($row_table_energoresurs['day_sulfirovanie_energy'] / $fact_sulf, 3). '</td>';
-        echo '<td>' . $row_table_energoresurs['day_sulfirovanie_energy'] . '</td>';
+        echo '<td>' . $electricity_sulfy . '</td>';
         echo '</tr>';
         echo '<tr class="trIndex">';
         echo '<td>склад готовой продукции</td>';
         echo '<td>' . $target_warehouse_energy . '</td>';
         echo '<td>' . $row_table_energoresurs['current_warehouse_energy'] . '</td>';
         echo '<td>' . round($row_table_energoresurs['day_warehouse_energy'] , 3). '</td>';
-        echo '<td>' . $row_table_energoresurs['day_warehouse_energy'] . '</td>';
+        echo '<td>' . $electricity_warehouse . '</td>';
         echo '</tr>';
         echo '<tr class="trIndex">';
         echo '<td>утилиты</td>';

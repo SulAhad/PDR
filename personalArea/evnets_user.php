@@ -31,7 +31,7 @@ if ($a == $user)
                     \"{$event['time_end']}\")\'>";
                     echo "<button value='{$event['id']}' class='close-button' onclick='event.stopPropagation(); removeDiv(this.parentNode);' style='margin-left: auto;'>&times;</button>";
             echo"<input type='checkbox' name='event_checkbox[]' class='event_checkbox form-check-input' value='{$event['id']}' $checkboxStatus onclick='event.stopPropagation()'>";
-            echo"<span class='update_time_span' style='color: white; border: 1px;'> {$event['date_time_event']} мин.</span><br>";
+            echo"<span class='update_time_span' style='color: white; border: 1px;'> {$event['date_time_event']} мин.</span>";
             echo"<span style='border: 1px; color:white; border-radius:6px; font-size:12px;' class='update_event_span rounded m-1 responsive-text'>{$event['name_event']}</span> <span class='rounded' style='background:red; width:20px; color:white;'>всё сложно</span><br>";
             echo"</div>";
         } 
@@ -45,7 +45,7 @@ if ($a == $user)
                         \"{$event['id']}\", \"{$event['time_start']}\", 
                         \"{$event['time_end']}\")'>";
                         echo "<button value='{$event['id']}' class='close-button' onclick='event.stopPropagation(); removeDiv(this.parentNode);' style='margin-left: auto;'>&times;</button>";
-            echo"<span style='color: white; border: 1px;'>{$event['date_time_event']} мин.</span><br>";
+            echo"<span style='color: white; border: 1px;'>{$event['date_time_event']} мин.</span>";
             echo"<span  class='rounded m-1 responsive-text' style=' border-radius:6px; color:white; border: 1px; font-size:12px;'>{$event['name_event']}</span><span class='rounded' style='background:red; width:20px; color:white;'>всё сложно</span><br>";
             echo"</div>";
         }
@@ -63,7 +63,7 @@ if ($a == $user)
                     \"{$event['time_end']}\")'>";
                     echo "<button value='{$event['id']}' class='close-button' onclick='event.stopPropagation(); removeDiv(this.parentNode);' style='margin-left: auto;'>&times;</button>";
                 echo" <input  type='checkbox'  class='event_checkbox form-check-input' value='{$event['id']}' $checkboxStatus onclick='event.stopPropagation()'>";
-                echo"<span  class='update_time_span' style='color: white; border: 1px;'> {$event['date_time_event']} мин.</span><br>";
+                echo"<span  class='update_time_span' style='color: white; border: 1px;'> {$event['date_time_event']} мин.</span>";
                 echo"<span style='color: white; border: 1px; background:{$event['event_color']}; border-radius:6px; font-size:12px;' class='update_event_span responsive-text rounded m-1'>{$event['name_event']}</span><br>";
                 echo"</div>";
         } 
@@ -77,7 +77,7 @@ if ($a == $user)
                 \"{$event['id']}\", \"{$event['time_start']}\", 
                 \"{$event['time_end']}\")'>";
                 echo "<button value='{$event['id']}' class='close-button' onclick='event.stopPropagation(); removeDiv(this.parentNode);' style='margin-left: auto;'>&times;</button>";
-            echo"<span style='color: white; border: 1px;'>{$event['date_time_event']} мин.</span><br>";
+            echo"<span style='color: white; border: 1px;'>{$event['date_time_event']} мин.</span>";
             echo"<span  class='rounded m-1 responsive-text' style='color:white; background:{$event['event_color']}; border: 1px;  border-radius:6px; font-size:12px;'>{$event['name_event']}</span><br>";
             echo"</div>";
         }
