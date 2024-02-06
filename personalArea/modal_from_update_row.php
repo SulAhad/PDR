@@ -38,7 +38,7 @@
             <span style="color:gray; font-size:16px; width:40%;">Повторять событие до</span>
             <div style="margin-left: auto; width:60%;">
                 <input type="date" class="form-control form-control-sm" id="eventRepeatDate" style="border-radius: 10px;"></input>
-                <div class="mt-2">
+                <!-- <div class="mt-2">
                     <input type="checkbox" class="form-check-input" id="" style="margin: 5px;"></input>
                     <input type="checkbox" class="form-check-input" id="" style="margin: 5px;"></input>
                     <input type="checkbox" class="form-check-input" id="" style="margin: 5px;"></input>
@@ -55,7 +55,7 @@
                     <span class="meek_days">СР</span>  
                     <span class="meek_days">ЧТ</span>  
                     <span class="meek_days">ПТ</span>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="modal-footer mt-2">

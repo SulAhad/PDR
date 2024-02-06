@@ -145,6 +145,48 @@ else
     }
 }
 ?>
+<!-- <script>
+   var selectedDiv = null;
+  var offset = { x: 0, y: 0 };
+var isDragging = false; // Флаг для отслеживания факта начала перетаскивания
+document.addEventListener("mousedown", function(e) {
+  if (e.target.classList.contains("div_hover")) {
+    selectedDiv = e.target;
+    offset.x = e.clientX - selectedDiv.getBoundingClientRect().left;
+    offset.y = e.clientY - selectedDiv.getBoundingClientRect().top;
+    selectedDiv.style.position = "fixed";
+    selectedDiv.style.zIndex = 1000;
+    isDragging = false; // Установка флага в значение false
+    document.addEventListener("mousemove", startDragDiv);}});
+function startDragDiv(e) {
+  if (!isDragging) { // Если флаг установлен в false
+    if (e.clientX !== offset.x || e.clientY !== offset.y) { // Если координаты мыши изменились
+      isDragging = true; // Устанавливаем флаг в значение true
+      document.removeEventListener("mousemove", startDragDiv); // Удаляем обработчик данного события
+      document.addEventListener("mousemove", dragDiv);}}}
+function dragDiv(e) {
+  if (selectedDiv) {
+    selectedDiv.style.left = e.clientX - offset.x + "px";
+    selectedDiv.style.top = e.clientY - offset.y + "px";
+    var cell = document.getElementById('$cell_id');
+    var cellRect = cell.getBoundingClientRect();
+    var divRect = selectedDiv.getBoundingClientRect();
+    if (e.clientX < cellRect.left) {
+      selectedDiv.style.left = cellRect.left + "px";}
+    if (e.clientX > cellRect.right - divRect.width) {
+      selectedDiv.style.left = cellRect.right - divRect.width + "px";}
+    if (e.clientY < cellRect.top) {
+      selectedDiv.style.top = cellRect.top + "px";}
+    if (e.clientY > cellRect.bottom - divRect.height) {
+      selectedDiv.style.top = cellRect.bottom - divRect.height + "px"; }}}
+document.addEventListener("mouseup", function() {
+  if (selectedDiv) {
+    document.removeEventListener("mousemove", startDragDiv);
+    document.removeEventListener("mousemove", dragDiv);
+    selectedDiv = null;}
+  isDragging = false;});
+
+</script> -->
 <script>
 function removeDiv(element) {
     var delete_event = $(element).children('button').val();

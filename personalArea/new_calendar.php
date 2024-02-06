@@ -30,7 +30,14 @@ $a = $_SESSION['real_name'];
   } );
   </script>
     </head>
-    
+    <style>
+            body {
+            -webkit-user-select: none; /* Запрет выделения для Chrome, Safari, Opera */
+            -moz-user-select: none; /* Запрет выделения для Firefox */
+            -ms-user-select: none; /* Запрет выделения для Internet Explorer/Edge */
+            user-select: none; /* Общий запрет выделения */
+            }
+        </style>
     <body style="background:GhostWhite;">
     <?php require($_SERVER['DOCUMENT_ROOT'].'/Engels/notification/notification.php') ?>
         <div class="checkbox-container bg-light">
@@ -86,6 +93,8 @@ $a = $_SESSION['real_name'];
         <?php require('add_modal.php'); ?>
         <?php require('script.php'); ?>
         <?php require('../Engels/footer/footer.php') ?>
+        
+
     </body>
     
 </html>
