@@ -56,8 +56,6 @@ while ($row = mysqli_fetch_assoc($resultOEE))
                                             }
                                             ?>
                                         </select></th> -->
-                                        <th>OEE, %</th>
-                                        <th colspan='4'>Замечания по качеству</th>
                                         <th>Процент премии</th>
                                         </tr>
                                     </thead>
@@ -77,64 +75,72 @@ while ($row = mysqli_fetch_assoc($resultOEE))
                                         // var name = document.getElementById('name_operator');
                                         // alert(name.value);
                                     </script>
-                                    <tbody id="tableStat">
+                                    <tbody id="tableStat" style="font-family: Calibri Light;">
                                         <?php
-                                        $message = "SELECT name_operator, MONTH(date) as month, YEAR(date) as year, AVG(CASE WHEN oee <> 0 THEN oee END) as total_oee, 
-                                        SUM(quality1) as total_quality1, 
-                                        SUM(quality2) as total_quality2, SUM(quality3) as total_quality3, SUM(quality4) as total_quality4,
-                                        GROUP_CONCAT(comment SEPARATOR '\t') AS comment
+                                        $message = "SELECT name_operator, 
+                                        CASE 
+                                            WHEN MONTH(date) = 1 THEN 'январь'
+                                            WHEN MONTH(date) = 2 THEN 'февраль'
+                                            WHEN MONTH(date) = 3 THEN 'март'
+                                            WHEN MONTH(date) = 4 THEN 'апрель'
+                                            WHEN MONTH(date) = 5 THEN 'май'
+                                            WHEN MONTH(date) = 6 THEN 'июнь'
+                                            WHEN MONTH(date) = 7 THEN 'июль'
+                                            WHEN MONTH(date) = 8 THEN 'август'
+                                            WHEN MONTH(date) = 9 THEN 'сентябрь'
+                                            WHEN MONTH(date) = 10 THEN 'октябрь'
+                                            WHEN MONTH(date) = 11 THEN 'ноябрь'
+                                            WHEN MONTH(date) = 12 THEN 'декабрь'
+                                        END AS month, 
+                                        YEAR(date) as year, AVG(CASE WHEN percent <> 0 THEN percent END) as total_percent
                                         FROM (
-                                            SELECT name_operator, date, oee, quality1, quality2, quality3, quality4, comment FROM innotech1 
+                                            SELECT name_operator, date, oee, percent FROM innotech1 
                                             UNION ALL
-                                            SELECT name_operator, date, oee, quality1, quality2, quality3, quality4, comment FROM innotech2
+                                            SELECT name_operator, date, oee, percent FROM innotech2
                                             UNION ALL 
-                                            SELECT name_operator, date, oee, quality1, quality2, quality3, quality4, comment FROM innotech3
+                                            SELECT name_operator, date, oee, percent FROM innotech3
                                             UNION ALL 
-                                            SELECT name_operator, date, oee, quality1, quality2, quality3, quality4, comment FROM uva4
+                                            SELECT name_operator, date, oee, percent FROM uva4
                                             UNION ALL 
-                                            SELECT name_operator, date, oee, quality1, quality2, quality3, quality4, comment FROM uva5
+                                            SELECT name_operator, date, oee, percent FROM uva5
                                             UNION ALL 
-                                            SELECT name_operator, date, oee, quality1, quality2, quality3, quality4, comment FROM acma
+                                            SELECT name_operator, date, oee, percent FROM acma
                                             UNION ALL 
-                                            SELECT name_operator, date, oee, quality1, quality2, quality3, quality4, comment FROM shrink
+                                            SELECT name_operator, date, oee, percent FROM shrink
                                             UNION ALL 
-                                            SELECT name_operator, date, oee, quality1, quality2, quality3, quality4, comment FROM pallet
+                                            SELECT name_operator, date, oee, percent FROM pallet
                                             UNION ALL 
-                                            SELECT name_operator, date, oee, quality1, quality2, quality3, quality4, comment FROM bunker
+                                            SELECT name_operator, date, oee, percent FROM bunker
                                             UNION ALL 
-                                            SELECT name_operator, date, oee, quality1, quality2, quality3, quality4, comment FROM sushka
+                                            SELECT name_operator, date, oee, percent FROM sushka
                                             UNION ALL 
-                                            SELECT name_operator, date, oee, quality1, quality2, quality3, quality4, comment FROM bashnya
+                                            SELECT name_operator, date, oee, percent FROM bashnya
                                             UNION ALL 
-                                            SELECT name_operator, date, oee, quality1, quality2, quality3, quality4, comment FROM gazgen
+                                            SELECT name_operator, date, oee, percent FROM gazgen
                                             UNION ALL 
-                                            SELECT name_operator, date, oee, quality1, quality2, quality3, quality4, comment FROM prigotovlenie
+                                            SELECT name_operator, date, oee, percent FROM prigotovlenie
                                             UNION ALL 
-                                            SELECT name_operator, date, oee, quality1, quality2, quality3, quality4, comment FROM postdobavki
+                                            SELECT name_operator, date, oee, percent FROM postdobavki
                                         ) AS all_tables
                                         GROUP BY name_operator, YEAR(date), MONTH(date)
                                         ORDER BY year, month, name_operator;";
                                         $link->set_charset("utf8");
                                         $result = mysqli_query($link, $message);
                                         while ($row = mysqli_fetch_assoc($result)) {
-                                            if($row['total_oee'] > $oee){
-
-                                            echo "<tr  style='background:PaleGreen;'>";
+                                            $percent = $row['total_percent'];
+                                            if($percent == 9){
+                                                echo "<tr style='background:lightgreen;'>";
                                             }
-                                            else {
-                                                echo "<tr  style='background:PeachPuff;'>";
+                                            if($percent < 9){
+                                                echo "<tr style='background:lightyellow;'>";
+                                            }
+                                            if($percent < 6){
+                                                echo "<tr style='background:lightcoral;'>";
                                             }
                                             echo "<td>" . $row['year'] . "</td>";
                                             echo "<td>" . $row['month'] . "</td>";
                                             echo "<td>" . $row['name_operator'] . "</td>";
-                                            echo "<td>" . number_format($row['total_oee'], 2) . "</td>";
-                                            echo "<td title='" . htmlspecialchars($row['comment']) . "'>" . $row['total_quality1'] . "</td>";
-                                            echo "<td title='" . htmlspecialchars($row['comment']) . "'>" . $row['total_quality2'] . "</td>";
-                                            echo "<td title='" . htmlspecialchars($row['comment']) . "'>" . $row['total_quality3'] . "</td>";
-                                            echo "<td title='" . htmlspecialchars($row['comment']) . "'>" . $row['total_quality4'] . "</td>";
-                                    
-                                            $adjusted_oee = $row['total_oee'] * $max_percent / 96 - (($row['total_quality1'] +$row['total_quality2'] + $row['total_quality3'] + $row['total_quality4']) * $max_value_for_quality);
-                                            echo "<td>" . number_format($adjusted_oee, 2) . " %</td>";
+                                            echo "<td>" . round($row['total_percent'], 2) . " %</td>";
                                             echo "</tr>";}echo "</table>";
                                         ?>
                                     </tbody>

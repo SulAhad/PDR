@@ -20,7 +20,14 @@ $a = $_SESSION['login'];
                             <fieldset class="form-group border card shadow-sm">
                                 <div class="col-md-4">
                                     <label for="dateTime" style="font-size:12px;" class="m-2">Выберите дату</label>
-                                    <input type="date" style="border-bottom: 2px solid gray;" value="<?php echo date('Y-m-d'); ?>" id="dateTime" class="form-control mt-1" placeholder="" required>
+                                    <input type="date" 
+                                    min="<?php echo date('Y-m-d', strtotime('-2 days')); ?>" 
+                                    max="<?php echo date('Y-m-d', strtotime('+1 day')); ?>"
+                                    style="border-bottom: 2px solid gray;" 
+                                    value="<?php echo date('Y-m-d'); ?>" 
+                                    id="dateTime" 
+                                    class="input_color form-control mt-1" 
+                                    placeholder="" >
                                 </div>
                             <div class="table-responsive mt-4">
 
@@ -36,46 +43,51 @@ $a = $_SESSION['login'];
                                     </thead>
                                     <tbody>
                                         <tr>
+                                            <style>
+                                                .input_color{
+                                                    background: aliceblue;
+                                                }
+                                            </style>
                                             <td>Брак СМС, т</td>
-                                            <td><input value="0" required min="0" type="number" id="brak_sms_bilo" class="form-control border-0" required></td>
-                                            <td><input value="0" required min="0" type="number" id="brak_sms_prihod" class="form-control border-0" required></td>
-                                            <td><input value="0" required min="0" type="number" id="brak_sms_rashod" class="form-control border-0" required></td>
-                                            <td><input value="0" required min="0" type="number" id="brak_sms_ostatok" class="form-control border-0" required></td>
+                                            <td><input placeholder="0"  min="0" type="number" id="brak_sms_bilo" class="input_color form-control border-0" ></td>
+                                            <td><input placeholder="0"  min="0" type="number" id="brak_sms_prihod" class="input_color form-control border-0" ></td>
+                                            <td><input placeholder="0"  min="0" type="number" id="brak_sms_rashod" class="input_color form-control border-0" ></td>
+                                            <td><input placeholder="0"  min="0" type="number" id="brak_sms_ostatok" class="input_color form-control border-0" ></td>
                                         </tr>
                                         <tr>
                                             <td>Брак Сульфирование, т</td>
-                                            <td><input value="0" required min="0" type="number" id="brak_sulf_bilo" class="form-control border-0" required></td>
-                                            <td><input value="0" required min="0" type="number" id="brak_sulf_prihod" class="form-control border-0" required></td>
-                                            <td><input value="0" required min="0" type="number" id="brak_sulf_rashod" class="form-control border-0" required></td>
-                                            <td><input value="0" required min="0" type="number" id="brak_sulf_ostatok" class="form-control border-0" required></td>
+                                            <td><input placeholder="0"  min="0" type="number" id="brak_sulf_bilo" class="input_color form-control border-0" ></td>
+                                            <td><input placeholder="0"  min="0" type="number" id="brak_sulf_prihod" class="input_color form-control border-0" ></td>
+                                            <td><input placeholder="0"  min="0" type="number" id="brak_sulf_rashod" class="input_color form-control border-0" ></td>
+                                            <td><input placeholder="0"  min="0" type="number" id="brak_sulf_ostatok" class="input_color form-control border-0" ></td>
                                         </tr>
                                         <tr>
                                             <td>Брак Сульфирование (на растворение), т</td>
-                                            <td><input value="0" required min="0" type="number" id="brak_sulf_rastvor_bilo" class="form-control border-0" required></td>
-                                            <td><input value="0" required min="0" type="number" id="brak_sulf_rastvor_prihod" class="form-control border-0" required></td>
-                                            <td><input value="0" required min="0" type="number" id="brak_sulf_rastvor_rashod" class="form-control border-0" required></td>
-                                            <td><input value="0" required min="0" type="number" id="brak_sulf_rastvor_ostatok" class="form-control border-0" required></td>
+                                            <td><input placeholder="0"  min="0" type="number" id="brak_sulf_rastvor_bilo" class="input_color form-control border-0" ></td>
+                                            <td><input placeholder="0"  min="0" type="number" id="brak_sulf_rastvor_prihod" class="input_color form-control border-0" ></td>
+                                            <td><input placeholder="0"  min="0" type="number" id="brak_sulf_rastvor_rashod" class="input_color form-control border-0" ></td>
+                                            <td><input placeholder="0"  min="0" type="number" id="brak_sulf_rastvor_ostatok" class="input_color form-control border-0" ></td>
                                         </tr>
                                         <tr>
                                             <td>Изолятор, т</td>
-                                            <td><input value="0" required min="0" type="number" id="isolator_bilo" class="form-control border-0" required></td>
-                                            <td><input value="0" required min="0" type="number" id="isolator_prihod" class="form-control border-0" required></td>
-                                            <td><input value="0" required min="0" type="number" id="isolator_rashod" class="form-control border-0" required></td>
-                                            <td><input value="0" required min="0" type="number" id="isolator_ostatok" class="form-control border-0" required></td>
+                                            <td><input placeholder="0"  min="0" type="number" id="isolator_bilo" class="input_color form-control border-0" ></td>
+                                            <td><input placeholder="0"  min="0" type="number" id="isolator_prihod" class="input_color form-control border-0" ></td>
+                                            <td><input placeholder="0"  min="0" type="number" id="isolator_rashod" class="input_color form-control border-0" ></td>
+                                            <td><input placeholder="0"  min="0" type="number" id="isolator_ostatok" class="input_color form-control border-0" ></td>
                                         </tr>
                                         <tr>
                                             <td>Пыль, т</td>
-                                            <td><input value="0" required min="0" type="number" id="pil_bilo" class="form-control border-0" required></td>
-                                            <td><input value="0" required min="0" type="number" id="pil_prihod" class="form-control border-0" required></td>
-                                            <td><input value="0" required min="0" type="number" id="pil_rashod" class="form-control border-0" required></td>
-                                            <td><input value="0" required min="0" type="number" id="pil_ostatok" class="form-control border-0" required></td>
+                                            <td><input placeholder="0"  min="0" type="number" id="pil_bilo" class="input_color form-control border-0" ></td>
+                                            <td><input placeholder="0"  min="0" type="number" id="pil_prihod" class="input_color form-control border-0" ></td>
+                                            <td><input placeholder="0"  min="0" type="number" id="pil_rashod" class="input_color form-control border-0" ></td>
+                                            <td><input placeholder="0"  min="0" type="number" id="pil_ostatok" class="input_color form-control border-0" ></td>
                                         </tr>
                                         <tr>
                                             <td>Отсев на растворение, т</td>
-                                            <td><input value="0" required min="0" type="number" id="otsev_bilo" class="form-control border-0" required></td>
-                                            <td><input value="0" required min="0" type="number" id="otsev_prihod" class="form-control border-0" required></td>
-                                            <td><input value="0" required min="0" type="number" id="otsev_rashod" class="form-control border-0" required></td>
-                                            <td><input value="0" required min="0" type="number" id="otsev_ostatok" class="form-control border-0" required></td>
+                                            <td><input placeholder="0"  min="0" type="number" id="otsev_bilo" class="input_color form-control border-0" ></td>
+                                            <td><input placeholder="0"  min="0" type="number" id="otsev_prihod" class="input_color form-control border-0" ></td>
+                                            <td><input placeholder="0"  min="0" type="number" id="otsev_rashod" class="input_color form-control border-0" ></td>
+                                            <td><input placeholder="0"  min="0" type="number" id="otsev_ostatok" class="input_color form-control border-0" ></td>
                                         </tr>
                                             </tbody>
                                         </table>
@@ -92,7 +104,7 @@ $a = $_SESSION['login'];
                     (
                 		function()
                 		{
-
+                            var user = "<?php echo $a; ?>";
                 		    $(this).html('<img class="iconsButtons" src="/Engels/icons/sand-clock.png" />Сохранение...');
                 		    var dateTime = document.getElementById('dateTime');
                 		    var brak_sms_bilo = document.getElementById('brak_sms_bilo');
@@ -126,6 +138,7 @@ $a = $_SESSION['login'];
                                     url: '/Engels/sirye/addSirye.php',
                                     data:
                                     {
+                                        user: user,
                                         dateTime:dateTime.value, brak_sms_bilo:brak_sms_bilo.value,
                                         brak_sms_prihod:brak_sms_prihod.value,
                                         brak_sms_rashod:brak_sms_rashod.value,
@@ -154,30 +167,30 @@ $a = $_SESSION['login'];
                                     success: function(response)
                                     {
                                         var data = JSON.parse(response);
-                                        brak_sms_bilo.value = "0";
-                                        brak_sms_prihod.value = "0";
-                                        brak_sms_rashod.value = "0";
-                                        brak_sms_ostatok.value = "0";
-                                        brak_sulf_bilo.value = "0";
-                                        brak_sulf_prihod.value = "0";
-                                        brak_sulf_rashod.value = "0";
-                                        brak_sulf_ostatok.value = "0";
-                                        brak_sulf_rastvor_bilo.value = "0";
-                                        brak_sulf_rastvor_prihod.value = "0";
-                                        brak_sulf_rastvor_rashod.value = "0";
-                                        brak_sulf_rastvor_ostatok.value = "0";
-                                        isolator_bilo.value = "0";
-                                        isolator_prihod.value = "0";
-                                        isolator_rashod.value = "0";
-                                        isolator_ostatok.value = "0";
-                                        pil_bilo.value = "0";
-                                        pil_prihod.value = "0";
-                                        pil_rashod.value = "0";
-                                        pil_ostatok.value = "0";
-                                        otsev_bilo.value = "0";
-                                        otsev_prihod.value = "0";
-                                        otsev_rashod.value = "0";
-                                        otsev_ostatok.value = "0";
+                                        brak_sms_bilo.value = "";
+                                        brak_sms_prihod.value = "";
+                                        brak_sms_rashod.value = "";
+                                        brak_sms_ostatok.value = "";
+                                        brak_sulf_bilo.value = "";
+                                        brak_sulf_prihod.value = "";
+                                        brak_sulf_rashod.value = "";
+                                        brak_sulf_ostatok.value = "";
+                                        brak_sulf_rastvor_bilo.value = "";
+                                        brak_sulf_rastvor_prihod.value = "";
+                                        brak_sulf_rastvor_rashod.value = "";
+                                        brak_sulf_rastvor_ostatok.value = "";
+                                        isolator_bilo.value = "";
+                                        isolator_prihod.value = "";
+                                        isolator_rashod.value = "";
+                                        isolator_ostatok.value = "";
+                                        pil_bilo.value = "";
+                                        pil_prihod.value = "";
+                                        pil_rashod.value = "";
+                                        pil_ostatok.value = "";
+                                        otsev_bilo.value = "";
+                                        otsev_prihod.value = "";
+                                        otsev_rashod.value = "";
+                                        otsev_ostatok.value = "";
                                         $('.alert-success').fadeIn(1000).delay(3000).fadeOut(1000);
                                          // Имитируем успешное сохранение данных с помощью задержки setTimeout
                                         setTimeout(function()

@@ -101,17 +101,17 @@ $a = $_SESSION['login'];
                     <table id="myTable" class="table-hover table-bordered table table-sm ">
                         <thead>
                             <tr>
-                                <th><p class="p_Index">Дата</p></th>
-                                <th><p class="p_Index">Описание проблемы</p></th>
-                                <th><p class="p_Index">Оператор линии</p></th>
-                                <th><p class="p_Index">Причина</p></th>
-                                <th><p class="p_Index">Непосредственное действие</p></th>
-                                <th><p class="p_Index">Устранил</p></th>
-                                <th><p class="p_Index">Коренная причина</p></th>
-                                <th><p class="p_Index">Действие</p></th>
-                                <th><p class="p_Index">Ответственный</p></th>
-                                <th><p class="p_Index">Район / Участок</p></th>
-                                <th><p class="p_Index">Простой, мин.</p></th>
+                                <th><p>Дата</p></th>
+                                <th><p>Описание проблемы</p></th>
+                                <th><p>Оператор линии</p></th>
+                                <th><p>Причина</p></th>
+                                <th><p>Непосредственное действие</p></th>
+                                <th><p>Устранил</p></th>
+                                <th><p>Коренная причина</p></th>
+                                <th><p>Действие</p></th>
+                                <th><p>Ответственный</p></th>
+                                <th><p>Район/Участок</p></th>
+                                <th><p>Простой,мин.</p></th>
                                 <th><p class="p_Index"></p></th>
                                 <th><p class="p_Index"></p></th>
                             </tr>

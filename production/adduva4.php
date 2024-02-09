@@ -6,19 +6,40 @@
     $uva4 = htmlspecialchars($_POST['uva4']);
     $uva4_user = htmlspecialchars($_POST['uva4_user']);
 
+    $message_all = "SELECT * FROM operator WHERE id = $uva4_user";
     $link->set_charset("utf8");
+    $result_all = mysqli_query($link, $message_all);
+    while ($row_all = mysqli_fetch_assoc($result_all)) 
+    {
+        $name_operator = $row_all['name'];
+    }
+    require($_SERVER['DOCUMENT_ROOT'].'/Engels/paids/target_percent.php');
+    if($uva4 >= $target_inn3_4_max)
+    {
+        $percent = $max_percent;
+    }
+    if($uva4 < $target_inn3_4_max)
+    {
+        $percent = $medium_percent;
+    }
+    if($uva4 < $target_inn3_4_min)
+    {
+        $percent = $min_percent;
+    }
+    $link->set_charset("utf8");
+    
 
     mysqli_query($link, "INSERT INTO `uva4`
       (`id`,
       `date`,
       `team`,
-      `name_operator`,
-      `oee`)
+      `name_operator`, `id_user`,
+      `oee`, `percent`)
       VALUES (NULL,
       '$dateTime',
       '$team',
-      '$uva4_user',
-      '$uva4')");
+      '$name_operator', '$uva4_user',
+      '$uva4', '$percent')");
       // Получаем id последней вставленной строки
 $id = mysqli_insert_id($link);
 echo json_encode(array('id' => $id,

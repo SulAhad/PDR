@@ -6,13 +6,13 @@ if($_SESSION['premirovanie'] == 0){
     exit();
 }
 $a = $_SESSION['login'];
-$message_max_percent = "SELECT * FROM settings_for_paids ORDER BY id DESC LIMIT 1";
-$link->set_charset("utf8");
-$result_max_percent = mysqli_query($link, $message_max_percent);
-while ($row = mysqli_fetch_assoc($result_max_percent))
-{
-    $max_percent = $row['max_percent'];
-}
+// $message_max_percent = "SELECT * FROM settings_for_paids ORDER BY id DESC LIMIT 1";
+// $link->set_charset("utf8");
+// $result_max_percent = mysqli_query($link, $message_max_percent);
+// while ($row = mysqli_fetch_assoc($result_max_percent))
+// {
+//     $max_percent = $row['max_percent'];
+// }
 $messageOEE = "SELECT * FROM Settings_KPI ORDER BY id DESC LIMIT 1";
 $link->set_charset("utf8");
 $resultOEE = mysqli_query($link, $messageOEE);
@@ -20,6 +20,25 @@ while ($row = mysqli_fetch_assoc($resultOEE))
 {
     $oee = $row['targetOEE'];
 }
+
+$max_percent = 9;
+$medium_percent = 6;
+$min_percent = 3;
+
+$target_inn1_2_max = 95.1;
+$target_inn1_2_min = 94.1;
+
+$target_inn3_4_max = 95.5;
+$target_inn3_4_min = 94.5;
+
+$target_uva5_max = 95.4;
+$target_uva5_min = 94.4;
+
+$target_acma_max = 91;
+$target_acma_min = 90;
+
+$target_total_max = 95.1;
+$target_total_min = 94.1;
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -55,7 +74,18 @@ while ($row = mysqli_fetch_assoc($resultOEE))
                                         echo "<td>" . $row['month'] . "</td>";
                                         echo "<td>Иннотех 1</td>";
                                         echo "<td>" . number_format($row['total_oee'], 2) . "</td>";
-                                        $adjusted_oee = $row['total_oee'] * $max_percent / $oee;
+                                        if($row['total_oee'] >= $target_inn1_2_max)
+                                        {
+                                            $adjusted_oee = $max_percent;
+                                        }
+                                        if($row['total_oee'] < $target_inn1_2_max)
+                                        {
+                                            $adjusted_oee = $medium_percent;
+                                        }
+                                        if($row['total_oee'] < $target_inn1_2_min)
+                                        {
+                                            $adjusted_oee = $min_percent;
+                                        }
                                         echo "<td>" . number_format($adjusted_oee, 2) . " %</td>";
                                         echo "</tr>";
                                     }
@@ -72,7 +102,15 @@ while ($row = mysqli_fetch_assoc($resultOEE))
                                         echo "<td>" . $row['month'] . "</td>";
                                         echo "<td>Иннотех 2</td>";
                                         echo "<td>" . number_format($row['total_oee'], 2) . "</td>";
-                                        $adjusted_oee = $row['total_oee'] * $max_percent / $oee;
+                                        if($row['total_oee'] >= $target_inn1_2_max){
+                                            $adjusted_oee = $max_percent;
+                                        }
+                                        if($row['total_oee'] < $target_inn1_2_max){
+                                            $adjusted_oee = $medium_percent;
+                                        }
+                                        if($row['total_oee'] < $target_inn1_2_min){
+                                            $adjusted_oee = $min_percent;
+                                        }
                                         echo "<td>" . number_format($adjusted_oee, 2) . " %</td>";
                                         echo "</tr>";
                                     }
@@ -89,7 +127,15 @@ while ($row = mysqli_fetch_assoc($resultOEE))
                                         echo "<td>" . $row['month'] . "</td>";
                                         echo "<td>Иннотех 3</td>";
                                         echo "<td>" . number_format($row['total_oee'], 2) . "</td>";
-                                        $adjusted_oee = $row['total_oee'] * $max_percent / $oee;
+                                        if($row['total_oee'] >= $target_inn3_4_max){
+                                            $adjusted_oee = $max_percent;
+                                        }
+                                        if($row['total_oee'] < $target_inn3_4_max){
+                                            $adjusted_oee = $medium_percent;
+                                        }
+                                        if($row['total_oee'] < $target_inn3_4_min){
+                                            $adjusted_oee = $min_percent;
+                                        }
                                         echo "<td>" . number_format($adjusted_oee, 2) . " %</td>";
                                         echo "</tr>";
                                     }
@@ -106,7 +152,15 @@ while ($row = mysqli_fetch_assoc($resultOEE))
                                         echo "<td>" . $row['month'] . "</td>";
                                         echo "<td>UVA-4</td>";
                                         echo "<td>" . number_format($row['total_oee'], 2) . "</td>";
-                                        $adjusted_oee = $row['total_oee'] * $max_percent / $oee;
+                                        if($row['total_oee'] >= $target_inn3_4_max){
+                                            $adjusted_oee = $max_percent;
+                                        }
+                                        if($row['total_oee'] < $target_inn3_4_max){
+                                            $adjusted_oee = $medium_percent;
+                                        }
+                                        if($row['total_oee'] < $target_inn3_4_min){
+                                            $adjusted_oee = $min_percent;
+                                        }
                                         echo "<td>" . number_format($adjusted_oee, 2) . " %</td>";
                                         echo "</tr>";
                                     }
@@ -123,7 +177,15 @@ while ($row = mysqli_fetch_assoc($resultOEE))
                                         echo "<td>" . $row['month'] . "</td>";
                                         echo "<td>UVA-5</td>";
                                         echo "<td>" . number_format($row['total_oee'], 2) . "</td>";
-                                        $adjusted_oee = $row['total_oee'] * $max_percent / $oee;
+                                        if($row['total_oee'] >= $target_uva5_max){
+                                            $adjusted_oee = $max_percent;
+                                        }
+                                        if($row['total_oee'] < $target_uva5_max){
+                                            $adjusted_oee = $medium_percent;
+                                        }
+                                        if($row['total_oee'] < $target_uva5_min){
+                                            $adjusted_oee = $min_percent;
+                                        }
                                         echo "<td>" . number_format($adjusted_oee, 2) . " %</td>";
                                         echo "</tr>";
                                     }
@@ -140,7 +202,15 @@ while ($row = mysqli_fetch_assoc($resultOEE))
                                         echo "<td>" . $row['month'] . "</td>";
                                         echo "<td>АКМА</td>";
                                         echo "<td>" . number_format($row['total_oee'], 2) . "</td>";
-                                        $adjusted_oee = $row['total_oee'] * $max_percent / $oee;
+                                        if($row['total_oee'] >= $target_acma_max){
+                                            $adjusted_oee = $max_percent;
+                                        }
+                                        if($row['total_oee'] < $target_acma_max){
+                                            $adjusted_oee = $medium_percent;
+                                        }
+                                        if($row['total_oee'] < $target_acma_min){
+                                            $adjusted_oee = $min_percent;
+                                        }
                                         echo "<td>" . number_format($adjusted_oee, 2) . " %</td>";
                                         echo "</tr>";
                                     }
@@ -157,7 +227,15 @@ while ($row = mysqli_fetch_assoc($resultOEE))
                                         echo "<td>" . $row['month'] . "</td>";
                                         echo "<td>Prasmatic</td>";
                                         echo "<td>" . number_format($row['total_oee'], 2) . "</td>";
-                                        $adjusted_oee = $row['total_oee'] * $max_percent / $oee;
+                                        if($row['total_oee'] >= $target_acma_max){
+                                            $adjusted_oee = $max_percent;
+                                        }
+                                        if($row['total_oee'] < $target_acma_max){
+                                            $adjusted_oee = $medium_percent;
+                                        }
+                                        if($row['total_oee'] < $target_acma_min){
+                                            $adjusted_oee = $min_percent;
+                                        }
                                         echo "<td>" . number_format($adjusted_oee, 2) . " %</td>";
                                         echo "</tr>";
                                     }
@@ -174,7 +252,15 @@ while ($row = mysqli_fetch_assoc($resultOEE))
                                         echo "<td>" . $row['month'] . "</td>";
                                         echo "<td>Паллетайзер</td>";
                                         echo "<td>" . number_format($row['total_oee'], 2) . "</td>";
-                                        $adjusted_oee = $row['total_oee'] * $max_percent / $oee;
+                                        if($row['total_oee'] >= $target_total_max){
+                                            $adjusted_oee = $max_percent;
+                                        }
+                                        if($row['total_oee'] < $target_total_max){
+                                            $adjusted_oee = $medium_percent;
+                                        }
+                                        if($row['total_oee'] < $target_total_min){
+                                            $adjusted_oee = $min_percent;
+                                        }
                                         echo "<td>" . number_format($adjusted_oee, 2) . " %</td>";
                                         echo "</tr>";
                                     }
@@ -191,7 +277,15 @@ while ($row = mysqli_fetch_assoc($resultOEE))
                                         echo "<td>" . $row['month'] . "</td>";
                                         echo "<td>Бункера</td>";
                                         echo "<td>" . number_format($row['total_oee'], 2) . "</td>";
-                                        $adjusted_oee = $row['total_oee'] * $max_percent / $oee;
+                                        if($row['total_oee'] >= $target_total_max){
+                                            $adjusted_oee = $max_percent;
+                                        }
+                                        if($row['total_oee'] < $target_total_max){
+                                            $adjusted_oee = $medium_percent;
+                                        }
+                                        if($row['total_oee'] < $target_total_min){
+                                            $adjusted_oee = $min_percent;
+                                        }
                                         echo "<td>" . number_format($adjusted_oee, 2) . " %</td>";
                                         echo "</tr>";
                                     }
@@ -208,7 +302,15 @@ while ($row = mysqli_fetch_assoc($resultOEE))
                                         echo "<td>" . $row['month'] . "</td>";
                                         echo "<td>Сушильная башня</td>";
                                         echo "<td>" . number_format($row['total_oee'], 2) . "</td>";
-                                        $adjusted_oee = $row['total_oee'] * $max_percent / $oee;
+                                        if($row['total_oee'] >= $target_total_max){
+                                            $adjusted_oee = $max_percent;
+                                        }
+                                        if($row['total_oee'] < $target_total_max){
+                                            $adjusted_oee = $medium_percent;
+                                        }
+                                        if($row['total_oee'] < $target_total_min){
+                                            $adjusted_oee = $min_percent;
+                                        }
                                         echo "<td>" . number_format($adjusted_oee, 2) . " %</td>";
                                         echo "</tr>";
                                     }
@@ -225,7 +327,15 @@ while ($row = mysqli_fetch_assoc($resultOEE))
                                         echo "<td>" . $row['month'] . "</td>";
                                         echo "<td>Сухая нейтрализация</td>";
                                         echo "<td>" . number_format($row['total_oee'], 2) . "</td>";
-                                        $adjusted_oee = $row['total_oee'] * $max_percent / $oee;
+                                        if($row['total_oee'] >= $target_total_max){
+                                            $adjusted_oee = $max_percent;
+                                        }
+                                        if($row['total_oee'] < $target_total_max){
+                                            $adjusted_oee = $medium_percent;
+                                        }
+                                        if($row['total_oee'] < $target_total_min){
+                                            $adjusted_oee = $min_percent;
+                                        }
                                         echo "<td>" . number_format($adjusted_oee, 2) . " %</td>";
                                         echo "</tr>";
                                     }
@@ -242,7 +352,15 @@ while ($row = mysqli_fetch_assoc($resultOEE))
                                         echo "<td>" . $row['month'] . "</td>";
                                         echo "<td>Газогенерация</td>";
                                         echo "<td>" . number_format($row['total_oee'], 2) . "</td>";
-                                        $adjusted_oee = $row['total_oee'] * $max_percent / $oee;
+                                        if($row['total_oee'] >= $target_total_max){
+                                            $adjusted_oee = $max_percent;
+                                        }
+                                        if($row['total_oee'] < $target_total_max){
+                                            $adjusted_oee = $medium_percent;
+                                        }
+                                        if($row['total_oee'] < $target_total_min){
+                                            $adjusted_oee = $min_percent;
+                                        }
                                         echo "<td>" . number_format($adjusted_oee, 2) . " %</td>";
                                         echo "</tr>";
                                     }
@@ -259,7 +377,15 @@ while ($row = mysqli_fetch_assoc($resultOEE))
                                         echo "<td>" . $row['month'] . "</td>";
                                         echo "<td>Приготовление</td>";
                                         echo "<td>" . number_format($row['total_oee'], 2) . "</td>";
-                                        $adjusted_oee = $row['total_oee'] * $max_percent / $oee;
+                                        if($row['total_oee'] >= $target_total_max){
+                                            $adjusted_oee = $max_percent;
+                                        }
+                                        if($row['total_oee'] < $target_total_max){
+                                            $adjusted_oee = $medium_percent;
+                                        }
+                                        if($row['total_oee'] < $target_total_min){
+                                            $adjusted_oee = $min_percent;
+                                        }
                                         echo "<td>" . number_format($adjusted_oee, 2) . " %</td>";
                                         echo "</tr>";
                                     }
@@ -276,7 +402,15 @@ while ($row = mysqli_fetch_assoc($resultOEE))
                                         echo "<td>" . $row['month'] . "</td>";
                                         echo "<td>Постдобавки</td>";
                                         echo "<td>" . number_format($row['total_oee'], 2) . "</td>";
-                                        $adjusted_oee = $row['total_oee'] * $max_percent / $oee;
+                                        if($row['total_oee'] >= $target_total_max){
+                                            $adjusted_oee = $max_percent;
+                                        }
+                                        if($row['total_oee'] < $target_total_max){
+                                            $adjusted_oee = $medium_percent;
+                                        }
+                                        if($row['total_oee'] < $target_total_min){
+                                            $adjusted_oee = $min_percent;
+                                        }
                                         echo "<td>" . number_format($adjusted_oee, 2) . " %</td>";
                                         echo "</tr>";
                                     }

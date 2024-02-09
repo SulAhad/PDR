@@ -105,16 +105,18 @@ $a = $_SESSION['login'];
                     $(".delete").click(function() {
                         var idToDelete = $(this).val();
                         var row = $(this).closest("tr"); 
-                        $.ajax({
-                            type: 'POST',
-                            dataType: 'json',
-                            url: '/Engels/sulfonation/delete.php',
-                            data: {id: idToDelete},
-                            success: function(response) {
-                                row.remove(); 
-                                $('.alert-success_Delete').fadeIn(1000).delay(3000).fadeOut(1000);
-                            }
-                        });
+                        if (confirm("Вы действительно хотите удалить?")) {
+                            $.ajax({
+                                type: 'POST',
+                                dataType: 'json',
+                                url: '/Engels/sulfonation/delete.php',
+                                data: {id: idToDelete},
+                                success: function(response) {
+                                    row.remove(); 
+                                    $('.alert-success_Delete').fadeIn(1000).delay(3000).fadeOut(1000);
+                                }
+                            });
+                        };
                     });
                 });
                 </script>

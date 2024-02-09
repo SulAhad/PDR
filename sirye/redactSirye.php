@@ -277,20 +277,23 @@ $a = $_SESSION['login'];
                                     </script>
                     <script>
                             $(document).ready(function() {
-                              $(".deleteSirye").click(function() {
+                              $(".deleteSirye").click(function() 
+                              {
                                 var deleteUser = $(this).val();
                                 var row = $(this).closest("tr"); // получаем строку таблицы, которую нужно удалить
-                                $.ajax({
-                                  type: 'POST',
-                                  dataType: 'html',
-                                  url: '../sirye/deleteRowSirye.php',
-                                  data: {idUser: deleteUser},
-                                  success: function(response) {
-                                    var data = JSON.parse(response);
-                                    row.remove(); // удаляем строку таблицы
-                                    $('.alert-success_Delete').fadeIn(1000).delay(3000).fadeOut(1000);
-                                  }
-                                });
+                                if (confirm("Вы действительно хотите удалить?")) {
+                                    $.ajax({
+                                      type: 'POST',
+                                      dataType: 'html',
+                                      url: '../sirye/deleteRowSirye.php',
+                                      data: {idUser: deleteUser},
+                                      success: function(response) {
+                                        var data = JSON.parse(response);
+                                        row.remove(); // удаляем строку таблицы
+                                        $('.alert-success_Delete').fadeIn(1000).delay(3000).fadeOut(1000);
+                                      }
+                                    });
+                                };
                               });
                             });
                             </script>

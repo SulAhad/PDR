@@ -10,14 +10,18 @@ $a = $_SESSION['login'];
 <!DOCTYPE html>
 <html lang="ru">
 <head><?php require($_SERVER['DOCUMENT_ROOT'].'/Engels/head.php');?></head>
-
+<style>
+    .input_color{
+        background: aliceblue;
+    }
+</style>
     <body class="container ">
         <form  method="post" id="formToSend">
             <div class="row card shadow-sm mt-4 blur bg-light">
                 <p style="font-size:22px; border-bottom: 1px solid #f00;"><?php echo"$app_names->_production"; ?></p>
                 <script src="/Engels/script.js"></script>
                 <div class="col-md-12">
-                <?php require($_SERVER['DOCUMENT_ROOT'].'/Engels/notification/notification.php') ?>
+                    <?php require($_SERVER['DOCUMENT_ROOT'].'/Engels/notification/notification.php') ?>
                     <div class="row" method="post" id="formToSend">
                         <div class="col-md-3">
                             <fieldset class="card_hover form-group border p-3 m-1 card shadow-sm">
@@ -44,9 +48,9 @@ $a = $_SESSION['login'];
                             <fieldset class="card_hover form-group border p-3 m-1 card shadow-sm">
                                 <p style="font-size:21px; border-bottom: 1px solid #f00;">Выпуск</p>
                                 <label style="font-size:12px;" for="plan_team" class="mt-1">План</label>
-                                <input value="0" min="0" type="number" id="plan_team"  style="border-bottom: 2px solid gray;" class="form-control form-control-sm mt-1" placeholder="план" required>
+                                <input min="0" type="number" id="plan_team"  style="border-bottom: 2px solid gray;" class="input_color form-control form-control-sm mt-1" placeholder="план" required>
                                 <label style="font-size:12px;" for="fact_team" class="mt-1">Факт</label>
-                                <input value="0" min="0" type="number" id="fact_team"  style="border-bottom: 2px solid gray;" class="form-control form-control-sm mt-1" placeholder="факт" required>
+                                <input min="0" type="number" id="fact_team"  style="border-bottom: 2px solid gray;" class="input_color form-control form-control-sm mt-1" placeholder="факт" required>
                             </fieldset>
                         </div>
                         
@@ -54,9 +58,9 @@ $a = $_SESSION['login'];
                             <fieldset class="card_hover form-group border p-3 m-1 card shadow-sm">
                                 <p style="font-size:21px; border-bottom: 1px solid #f00;">Отклонение</p>
                                 <label for="deviation" style="font-size:12px;" class="mt-1">Отклонение</label>
-                                <input readonly value="0" min="0" type="number" id="deviation"  style="border-bottom: 2px solid gray;"  class="form-control form-control-sm mt-2" placeholder="отклонение" required>
+                                <input readonly min="0" type="number" id="deviation"  style="border-bottom: 2px solid gray;"  class="form-control form-control-sm mt-2" placeholder="отклонение" required>
                                 <label for="oee_total" style="font-size:12px;" class="mt-1">Общее OEE</label>
-                                <input value="0"  required min="0" type="number" id="oee_total" style="border-bottom: 2px solid gray;"  class="form-control form-control-sm mt-2" placeholder="oee" required>
+                                <input required min="0" type="number" id="oee_total" style="border-bottom: 2px solid gray;"  class="input_color form-control form-control-sm mt-2" placeholder="oee" required>
                             </fieldset>
                         </div>
                         <script>
@@ -91,34 +95,27 @@ $a = $_SESSION['login'];
                     <fieldset class="card_hover form-group border p-3 m-1 card shadow-sm">
                         <div class="form-group row">
                             <label for="OEE_team" style="font-size:12px;" class="mt-2">OEE, %</label>
-                            <input value="0" required min="0" max="100" type="number" id="OEE_team" style="border-bottom: 2px solid gray;" class="form-control form-control-sm mt-1" placeholder="oee">
+                            <input required min="0" max="100" type="number" id="OEE_team" style="border-bottom: 2px solid gray;" class="input_color form-control form-control-sm mt-1" placeholder="oee">
 <!-- ____________________________________________________________________________________________________________________________________________________________________________________________________ -->
                             <label for="innotech1" style="width:10%; font-size:12px;" class="mt-2">Innotech 1, %</label>
                             <label for="innotech1_trek" style="width:15%; font-size:12px;" class="mt-2">количество переходов, шт</label>
                             <label for="innotech1_user" style="width:15%; font-size:12px;" class="mt-2">Оператор</label>
                             <label for="innotech1_comment" style="width:60%; font-size:12px;" class="mt-2">Комментарий</label>
 
-                            <input value="0" required min="0" max="100" type="number" id="innotech1" style="width:10%;" class="form-control form-control-sm mt-1" placeholder="innotech 1" required>
-                            <input value="0" required min="0" max="100" type="number" id="innotech1_trek" style="width:15%;" class="form-control form-control-sm mt-1" placeholder="количество переходов" required>
-                            <select style="width:15%;" id="innotech1_user" class="form-select mt-1" aria-label="Default select example" autocomplete="on">
-                                    <?php
-                                    require($_SERVER['DOCUMENT_ROOT'].'/Engels/connect_db.php');
-                                    $message = "SELECT name_operator FROM innotech1 WHERE name_operator <> '' ORDER BY date DESC LIMIT 1";
-                                    $link->set_charset("utf8");
-                                    $result = mysqli_query($link, $message);
-
+                            <input value="0" required min="0" max="100" type="number" id="innotech1" style="width:10%;" class="input_color form-control form-control-sm mt-1" placeholder="innotech 1" required>
+                            <input required min="0" max="100" type="number" id="innotech1_trek" style="width:15%;" class="input_color form-control form-control-sm mt-1" placeholder="количество переходов" required>
+                            <select style="width:15%;" id="innotech1_user" class="input_color form-select mt-1" aria-label="Default select example" autocomplete="on">
+                            <?php
                                     $message_all = "SELECT * FROM operator";
                                     $link->set_charset("utf8");
                                     $result_all = mysqli_query($link, $message_all);
-                                    while ($row_all = mysqli_fetch_assoc($result_all)) {
-                                        echo "<option value='" . $row_all['name'] . "'>" . $row_all['name'] . "</option>";
+                                    while ($row_all = mysqli_fetch_assoc($result_all)) 
+                                    {
+                                        echo "<option value='" . $row_all['id'] . "'>" . $row_all['name'] . "</option>";
                                     }
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                        echo "<option selected value='" . $row['name_operator'] . "'>" . $row['name_operator'] . "</option>";
-                                    }
-                                    ?>
+                            ?>
                                 </select>
-                            <input type="text" id="innotech1_comment" style="width:60%;" class="form-control form-control-sm mt-1" placeholder="введите комментарий" ></input>
+                            <input type="text" id="innotech1_comment" style="width:60%;" class="input_color form-control form-control-sm mt-1" placeholder="..." ></input>
 <!-- ____________________________________________________________________________________________________________________________________________________________________________________________________ -->
 
                             <label for="innotech2" style="width:10%; font-size:12px;" class="mt-2">Innotech 2, %</label>
@@ -126,81 +123,60 @@ $a = $_SESSION['login'];
                             <label for="innotech2_user" style="width:15%; font-size:12px;" class="mt-2">Оператор</label>
                             <label for="innotech2_comment" style="width:60%; font-size:12px;" class="mt-2">Комментарий</label>
 
-                            <input value="0" required min="0" max="100" type="number" id="innotech2" style="width:10%;" class="form-control form-control-sm mt-1" placeholder="innotech 2" required>
-                            <input value="0" required min="0" max="100" type="number" id="innotech2_trek" style="width:15%;" class="form-control form-control-sm mt-1" placeholder="количество переходов" required>
-                            <select style="width:15%;" id="innotech2_user" class="form-select mt-1" aria-label="Default select example" autocomplete="on">
+                            <input value="0" required min="0" max="100" type="number" id="innotech2" style="width:10%;" class="input_color form-control form-control-sm mt-1" placeholder="innotech 2" required>
+                            <input required min="0" max="100" type="number" id="innotech2_trek" style="width:15%;" class="input_color form-control form-control-sm mt-1" placeholder="количество переходов" required>
+                            <select style="width:15%;" id="innotech2_user" class="input_color form-select mt-1" aria-label="Default select example" autocomplete="on">
                             <?php
-                                    require($_SERVER['DOCUMENT_ROOT'].'/Engels/connect_db.php');
-                                    $message = "SELECT name_operator FROM innotech2 WHERE name_operator <> '' ORDER BY date DESC LIMIT 1";
-                                    $link->set_charset("utf8");
-                                    $result = mysqli_query($link, $message);
-
                                     $message_all = "SELECT * FROM operator";
                                     $link->set_charset("utf8");
                                     $result_all = mysqli_query($link, $message_all);
-                                    while ($row_all = mysqli_fetch_assoc($result_all)) {
-                                        echo "<option value='" . $row_all['name'] . "'>" . $row_all['name'] . "</option>";
+                                    while ($row_all = mysqli_fetch_assoc($result_all)) 
+                                    {
+                                        echo "<option value='" . $row_all['id'] . "'>" . $row_all['name'] . "</option>";
                                     }
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                        echo "<option selected value='" . $row['name_operator'] . "'>" . $row['name_operator'] . "</option>";
-                                    }
-                                    ?>
+                            ?>
                             </select>
-                            <input type="text" id="innotech2_comment" style="width:60%;" class="form-control form-control-sm mt-1" placeholder="введите комментарий" ></input>
+                            <input type="text" id="innotech2_comment" style="width:60%;" class="input_color form-control form-control-sm mt-1" placeholder="..." ></input>
 <!-- ____________________________________________________________________________________________________________________________________________________________________________________________________ -->
                             <label for="innotech3" style="width:10%; font-size:12px;" class="mt-2">Innotech 3, %</label>
                             <label for="innotech3_trek" style="width:15%; font-size:12px;" class="mt-2">количество переходов, шт</label>
                             <label for="innotech3_user" style="width:15%; font-size:12px;" class="mt-2">Оператор</label>
                             <label for="innotech3_comment" style="width:60%; font-size:12px;" class="mt-2">Комментарий</label>
 
-                            <input value="0" required min="0" max="100" type="number" id="innotech3" style="width:10%;" class="form-control form-control-sm mt-1" placeholder="innotech 3" required>
-                            <input value="0" required min="0" max="100" type="number" id="innotech3_trek" style="width:15%;" class="form-control form-control-sm mt-1" placeholder="количество переходов" required>
-                            <select style="width:15%;" id="innotech3_user" class="form-select mt-1" aria-label="Default select example" autocomplete="on">
+                            <input value="0" required min="0" max="100" type="number" id="innotech3" style="width:10%;" class="input_color form-control form-control-sm mt-1" placeholder="innotech 3" required>
+                            <input required min="0" max="100" type="number" id="innotech3_trek" style="width:15%;" class="input_color form-control form-control-sm mt-1" placeholder="количество переходов" required>
+                            <select style="width:15%;" id="innotech3_user" class="input_color form-select mt-1" aria-label="Default select example" autocomplete="on">
                             <?php
-                                    require($_SERVER['DOCUMENT_ROOT'].'/Engels/connect_db.php');
-                                    $message = "SELECT name_operator FROM innotech3 WHERE name_operator <> '' ORDER BY date DESC LIMIT 1";
-                                    $link->set_charset("utf8");
-                                    $result = mysqli_query($link, $message);
-
                                     $message_all = "SELECT * FROM operator";
                                     $link->set_charset("utf8");
                                     $result_all = mysqli_query($link, $message_all);
-                                    while ($row_all = mysqli_fetch_assoc($result_all)) {
-                                        echo "<option value='" . $row_all['name'] . "'>" . $row_all['name'] . "</option>";
+                                    while ($row_all = mysqli_fetch_assoc($result_all)) 
+                                    {
+                                        echo "<option value='" . $row_all['id'] . "'>" . $row_all['name'] . "</option>";
                                     }
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                        echo "<option selected value='" . $row['name_operator'] . "'>" . $row['name_operator'] . "</option>";
-                                    }
-                                    ?>
+                            ?>
                             </select>
-                            <input type="text" id="innotech3_comment" style="width:60%;" class="form-control form-control-sm mt-1" placeholder="введите комментарий" ></input>
+                            <input type="text" id="innotech3_comment" style="width:60%;" class="input_color form-control form-control-sm mt-1" placeholder="..." ></input>
 <!-- ____________________________________________________________________________________________________________________________________________________________________________________________________ -->
                             <label for="uva4" style="width:10%; font-size:12px;" class="mt-2">UVA 4, %</label>
                             <label for="uva4_trek" style="width:15%; font-size:12px;" class="mt-2">количество переходов, шт</label>
                             <label for="uva4_user" style="width:15%; font-size:12px;" class="mt-2">Оператор</label>
                             <label for="uva4_comment" style="width:60%; font-size:12px;" class="mt-2">Комментарий</label>
 
-                            <input value="0" required min="0" max="100" type="number" id="uva4" style="width:10%;" class="form-control form-control-sm mt-1" placeholder="uva 4" required>
-                            <input value="0" required min="0" max="100" type="number" id="uva4_trek" style="width:15%;" class="form-control form-control-sm mt-1" placeholder="количество переходов" required>
-                            <select style="width:15%;" id="uva4_user" class="form-select mt-1" aria-label="Default select example" autocomplete="on">
+                            <input value="0" required min="0" max="100" type="number" id="uva4" style="width:10%;" class="input_color form-control form-control-sm mt-1" placeholder="uva 4" required>
+                            <input required min="0" max="100" type="number" id="uva4_trek" style="width:15%;" class="input_color form-control form-control-sm mt-1" placeholder="количество переходов" required>
+                            <select style="width:15%;" id="uva4_user" class="input_color form-select mt-1" aria-label="Default select example" autocomplete="on">
                             <?php
-                                    require($_SERVER['DOCUMENT_ROOT'].'/Engels/connect_db.php');
-                                    $message = "SELECT name_operator FROM uva4 WHERE name_operator <> '' ORDER BY date DESC LIMIT 1";
-                                    $link->set_charset("utf8");
-                                    $result = mysqli_query($link, $message);
-
                                     $message_all = "SELECT * FROM operator";
                                     $link->set_charset("utf8");
                                     $result_all = mysqli_query($link, $message_all);
-                                    while ($row_all = mysqli_fetch_assoc($result_all)) {
-                                        echo "<option value='" . $row_all['name'] . "'>" . $row_all['name'] . "</option>";
+                                    while ($row_all = mysqli_fetch_assoc($result_all)) 
+                                    {
+                                        echo "<option value='" . $row_all['id'] . "'>" . $row_all['name'] . "</option>";
                                     }
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                        echo "<option selected value='" . $row['name_operator'] . "'>" . $row['name_operator'] . "</option>";
-                                    }
-                                    ?>
+                            ?>
                             </select>
-                            <input type="text" id="uva4_comment" style="width:60%;" class="form-control form-control-sm mt-1" placeholder="введите комментарий" ></input>
+                            <input type="text" id="uva4_comment" style="width:60%;" class="input_color form-control form-control-sm mt-1" placeholder="..." ></input>
 <!-- ____________________________________________________________________________________________________________________________________________________________________________________________________ -->
 
                             <label for="uva5" style="width:10%; font-size:12px;" class="mt-2">UVA 5, %</label>
@@ -208,54 +184,40 @@ $a = $_SESSION['login'];
                             <label for="uva5_user" style="width:15%; font-size:12px;" class="mt-2">Оператор</label>
                             <label for="uva5_comment" style="width:60%; font-size:12px;" class="mt-2">Комментарий</label>
 
-                            <input value="0" required min="0" max="100" type="number" id="uva5" style="width:10%;" class="form-control form-control-sm mt-1" placeholder="uva 5" required>
-                            <input value="0" required min="0" max="100" type="number" id="uva5_trek" style="width:15%;" class="form-control form-control-sm mt-1" placeholder="количество переходов" required>
-                            <select style="width:15%;" id="uva5_user" class="form-select mt-1" aria-label="Default select example" autocomplete="on">
+                            <input value="0" required min="0" max="100" type="number" id="uva5" style="width:10%;" class="input_color form-control form-control-sm mt-1" placeholder="uva 5" required>
+                            <input required min="0" max="100" type="number" id="uva5_trek" style="width:15%;" class="input_color form-control form-control-sm mt-1" placeholder="количество переходов" required>
+                            <select style="width:15%;" id="uva5_user" class="input_color form-select mt-1" aria-label="Default select example" autocomplete="on">
                             <?php
-                                    require($_SERVER['DOCUMENT_ROOT'].'/Engels/connect_db.php');
-                                    $message = "SELECT name_operator FROM uva5 WHERE name_operator <> '' ORDER BY date DESC LIMIT 1";
-                                    $link->set_charset("utf8");
-                                    $result = mysqli_query($link, $message);
-
                                     $message_all = "SELECT * FROM operator";
                                     $link->set_charset("utf8");
                                     $result_all = mysqli_query($link, $message_all);
-                                    while ($row_all = mysqli_fetch_assoc($result_all)) {
-                                        echo "<option value='" . $row_all['name'] . "'>" . $row_all['name'] . "</option>";
+                                    while ($row_all = mysqli_fetch_assoc($result_all)) 
+                                    {
+                                        echo "<option value='" . $row_all['id'] . "'>" . $row_all['name'] . "</option>";
                                     }
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                        echo "<option selected value='" . $row['name_operator'] . "'>" . $row['name_operator'] . "</option>";
-                                    }
-                                    ?>
+                            ?>
                             </select>
-                            <input type="text" id="uva5_comment" style="width:60%;" class="form-control form-control-sm mt-1" placeholder="введите комментарий" ></input>
+                            <input type="text" id="uva5_comment" style="width:60%;" class="input_color form-control form-control-sm mt-1" placeholder="..." ></input>
 <!-- ____________________________________________________________________________________________________________________________________________________________________________________________________ -->
                             <label for="acma" style="width:10%; font-size:12px;" class="mt-2">ACMA, %</label>
                             <label for="acma_trek" style="width:15%; font-size:12px;" class="mt-2">количество переходов, шт</label>
                             <label for="acma_user" style="width:15%; font-size:12px;" class="mt-2">Оператор</label>
                             <label for="acma_comment" style="width:60%; font-size:12px;" class="mt-2">Комментарий</label>
 
-                            <input value="0" required min="0" max="100" type="number" id="acma" style="width:10%;" class="form-control form-control-sm mt-1" placeholder="acma" required>
-                            <input value="0" required min="0" max="100" type="number" id="acma_trek" style="width:15%;" class="form-control form-control-sm mt-1" placeholder="количество переходов" required>
-                            <select style="width:15%;" id="acma_user" class="form-select mt-1" aria-label="Default select example" autocomplete="on">
+                            <input value="0" required min="0" max="100" type="number" id="acma" style="width:10%;" class="input_color form-control form-control-sm mt-1" placeholder="acma" required>
+                            <input required min="0" max="100" type="number" id="acma_trek" style="width:15%;" class="input_color form-control form-control-sm mt-1" placeholder="количество переходов" required>
+                            <select style="width:15%;" id="acma_user" class="input_color form-select mt-1" aria-label="Default select example" autocomplete="on">
                             <?php
-                                    require($_SERVER['DOCUMENT_ROOT'].'/Engels/connect_db.php');
-                                    $message = "SELECT name_operator FROM acma WHERE name_operator <> '' ORDER BY date DESC LIMIT 1";
-                                    $link->set_charset("utf8");
-                                    $result = mysqli_query($link, $message);
-
                                     $message_all = "SELECT * FROM operator";
                                     $link->set_charset("utf8");
                                     $result_all = mysqli_query($link, $message_all);
-                                    while ($row_all = mysqli_fetch_assoc($result_all)) {
-                                        echo "<option value='" . $row_all['name'] . "'>" . $row_all['name'] . "</option>";
+                                    while ($row_all = mysqli_fetch_assoc($result_all)) 
+                                    {
+                                        echo "<option value='" . $row_all['id'] . "'>" . $row_all['name'] . "</option>";
                                     }
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                        echo "<option selected value='" . $row['name_operator'] . "'>" . $row['name_operator'] . "</option>";
-                                    }
-                                    ?>
+                            ?>
                             </select>
-                            <input type="text" id="acma_comment" style="width:60%;" class="form-control form-control-sm mt-1" placeholder="введите комментарий" ></input>
+                            <input type="text" id="acma_comment" style="width:60%;" class="input_color form-control form-control-sm mt-1" placeholder="..." ></input>
 <!-- ____________________________________________________________________________________________________________________________________________________________________________________________________ -->
                             <label readonly for="shrink" style="width:10%; font-size:12px;" class="mt-2">Shrink, %</label>
                             <label readonly for="shrink_trek" style="width:15%; font-size:12px;" class="mt-2">количество переходов, шт</label>
@@ -266,23 +228,16 @@ $a = $_SESSION['login'];
                             <input readonly value="0" required min="0" max="100" type="number" id="shrink_trek" style="width:15%;" class="form-control form-control-sm mt-1" placeholder="количество переходов" required>
                             <select style="width:15%;" id="shrink_user" class="form-select mt-1" aria-label="Default select example" autocomplete="on">
                             <?php
-                                    require($_SERVER['DOCUMENT_ROOT'].'/Engels/connect_db.php');
-                                    $message = "SELECT name_operator FROM shrink WHERE name_operator <> '' ORDER BY date DESC LIMIT 1";
-                                    $link->set_charset("utf8");
-                                    $result = mysqli_query($link, $message);
-
                                     $message_all = "SELECT * FROM operator";
                                     $link->set_charset("utf8");
                                     $result_all = mysqli_query($link, $message_all);
-                                    while ($row_all = mysqli_fetch_assoc($result_all)) {
-                                        echo "<option value='" . $row_all['name'] . "'>" . $row_all['name'] . "</option>";
+                                    while ($row_all = mysqli_fetch_assoc($result_all)) 
+                                    {
+                                        echo "<option value='" . $row_all['id'] . "'>" . $row_all['name'] . "</option>";
                                     }
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                        echo "<option selected value='" . $row['name_operator'] . "'>" . $row['name_operator'] . "</option>";
-                                    }
-                                    ?>
+                            ?>
                             </select>
-                            <input readonly type="text" id="shrink_comment" style="width:60%;" class="form-control form-control-sm mt-1" placeholder="введите комментарий" ></input>
+                            <input readonly type="text" id="shrink_comment" style="width:60%;" class="form-control form-control-sm mt-1" placeholder="..." ></input>
 <!-- ____________________________________________________________________________________________________________________________________________________________________________________________________ -->
                             <label readonly for="pallet" style="width:10%; font-size:12px;" class="mt-2">Паллетайзер, %</label>
                             <label readonly for="pallet_trek" style="width:15%; font-size:12px;" class="mt-2">количество переходов, шт</label>
@@ -293,23 +248,16 @@ $a = $_SESSION['login'];
                             <input readonly value="0" required min="0" max="100" type="number" id="pallet_trek" style="width:15%;" class="form-control form-control-sm mt-1" placeholder="количество переходов" required>
                             <select style="width:15%;" id="pallet_user" class="form-select mt-1" aria-label="Default select example" autocomplete="on">
                             <?php
-                                    require($_SERVER['DOCUMENT_ROOT'].'/Engels/connect_db.php');
-                                    $message = "SELECT name_operator FROM pallet WHERE name_operator <> '' ORDER BY date DESC LIMIT 1";
-                                    $link->set_charset("utf8");
-                                    $result = mysqli_query($link, $message);
-
                                     $message_all = "SELECT * FROM operator";
                                     $link->set_charset("utf8");
                                     $result_all = mysqli_query($link, $message_all);
-                                    while ($row_all = mysqli_fetch_assoc($result_all)) {
-                                        echo "<option value='" . $row_all['name'] . "'>" . $row_all['name'] . "</option>";
+                                    while ($row_all = mysqli_fetch_assoc($result_all)) 
+                                    {
+                                        echo "<option value='" . $row_all['id'] . "'>" . $row_all['name'] . "</option>";
                                     }
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                        echo "<option selected value='" . $row['name_operator'] . "'>" . $row['name_operator'] . "</option>";
-                                    }
-                                    ?>
+                            ?>
                             </select>
-                            <input readonly type="text" id="pallet_comment" style="width:60%;" class="form-control form-control-sm mt-1" placeholder="введите комментарий" ></input>
+                            <input readonly type="text" id="pallet_comment" style="width:60%;" class="form-control form-control-sm mt-1" placeholder="..." ></input>
 <!-- ____________________________________________________________________________________________________________________________________________________________________________________________________ -->
                             <label readonly for="bunker" style="width:10%; font-size:12px;" class="mt-2">Бункеровщик, %</label>
                             <label readonly for="bunker_trek" style="width:15%; font-size:12px;" class="mt-2">количество переходов, шт</label>
@@ -320,23 +268,16 @@ $a = $_SESSION['login'];
                             <input readonly value="0" min="0" max="100" type="number" id="bunker_trek" style="width:15%;" class="form-control form-control-sm mt-1" placeholder="количество переходов" required>
                             <select style="width:15%;" id="bunker_user" class="form-select mt-1" aria-label="Default select example" autocomplete="on">
                             <?php
-                                    require($_SERVER['DOCUMENT_ROOT'].'/Engels/connect_db.php');
-                                    $message = "SELECT name_operator FROM bunker WHERE name_operator <> '' ORDER BY date DESC LIMIT 1";
-                                    $link->set_charset("utf8");
-                                    $result = mysqli_query($link, $message);
-
                                     $message_all = "SELECT * FROM operator";
                                     $link->set_charset("utf8");
                                     $result_all = mysqli_query($link, $message_all);
-                                    while ($row_all = mysqli_fetch_assoc($result_all)) {
-                                        echo "<option value='" . $row_all['name'] . "'>" . $row_all['name'] . "</option>";
+                                    while ($row_all = mysqli_fetch_assoc($result_all)) 
+                                    {
+                                        echo "<option value='" . $row_all['id'] . "'>" . $row_all['name'] . "</option>";
                                     }
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                        echo "<option selected value='" . $row['name_operator'] . "'>" . $row['name_operator'] . "</option>";
-                                    }
-                                    ?>
+                            ?>
                             </select>
-                            <input readonly type="text" id="bunker_comment" style="width:60%;" class="form-control form-control-sm mt-1" placeholder="введите комментарий" ></input>
+                            <input readonly type="text" id="bunker_comment" style="width:60%;" class="form-control form-control-sm mt-1" placeholder="..." ></input>
 <!-- ____________________________________________________________________________________________________________________________________________________________________________________________________ -->
                             <label readonly for="sushka" style="width:10%; font-size:12px;" class="mt-2">Сушка, %</label>
                             <label readonly for="sushka_trek" style="width:15%; font-size:12px;" class="mt-2">количество переходов, шт</label>
@@ -347,23 +288,16 @@ $a = $_SESSION['login'];
                             <input readonly value="0" min="0" max="100" type="number" id="sushka_trek" style="width:15%;" class="form-control form-control-sm mt-1" placeholder="количество переходов" required>
                             <select style="width:15%;" id="sushka_user" class="form-select mt-1" aria-label="Default select example" autocomplete="on">
                             <?php
-                                    require($_SERVER['DOCUMENT_ROOT'].'/Engels/connect_db.php');
-                                    $message = "SELECT name_operator FROM sushka WHERE name_operator <> '' ORDER BY date DESC LIMIT 1";
-                                    $link->set_charset("utf8");
-                                    $result = mysqli_query($link, $message);
-
                                     $message_all = "SELECT * FROM operator";
                                     $link->set_charset("utf8");
                                     $result_all = mysqli_query($link, $message_all);
-                                    while ($row_all = mysqli_fetch_assoc($result_all)) {
-                                        echo "<option value='" . $row_all['name'] . "'>" . $row_all['name'] . "</option>";
+                                    while ($row_all = mysqli_fetch_assoc($result_all)) 
+                                    {
+                                        echo "<option value='" . $row_all['id'] . "'>" . $row_all['name'] . "</option>";
                                     }
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                        echo "<option selected value='" . $row['name_operator'] . "'>" . $row['name_operator'] . "</option>";
-                                    }
-                                    ?>
+                            ?>
                             </select>
-                            <input readonly type="text" id="sushka_comment" style="width:60%;" class="form-control form-control-sm mt-1" placeholder="введите комментарий" ></input>
+                            <input readonly type="text" id="sushka_comment" style="width:60%;" class="form-control form-control-sm mt-1" placeholder="..." ></input>
 <!-- ____________________________________________________________________________________________________________________________________________________________________________________________________ -->
                             <label readonly for="bashnya" style="width:10%; font-size:12px;" class="mt-2">Башня, %</label>
                             <label readonly for="bashnya_trek" style="width:15%; font-size:12px;" class="mt-2">количество переходов, шт</label>
@@ -374,23 +308,16 @@ $a = $_SESSION['login'];
                             <input readonly value="0" min="0" max="100" type="number" id="bashnya_trek" style="width:15%;" class="form-control form-control-sm mt-1" placeholder="количество переходов" required>
                             <select style="width:15%;" id="bashnya_user" class="form-select mt-1" aria-label="Default select example" autocomplete="on">
                             <?php
-                                    require($_SERVER['DOCUMENT_ROOT'].'/Engels/connect_db.php');
-                                    $message = "SELECT name_operator FROM bashnya WHERE name_operator <> '' ORDER BY date DESC LIMIT 1";
-                                    $link->set_charset("utf8");
-                                    $result = mysqli_query($link, $message);
-
                                     $message_all = "SELECT * FROM operator";
                                     $link->set_charset("utf8");
                                     $result_all = mysqli_query($link, $message_all);
-                                    while ($row_all = mysqli_fetch_assoc($result_all)) {
-                                        echo "<option value='" . $row_all['name'] . "'>" . $row_all['name'] . "</option>";
+                                    while ($row_all = mysqli_fetch_assoc($result_all)) 
+                                    {
+                                        echo "<option value='" . $row_all['id'] . "'>" . $row_all['name'] . "</option>";
                                     }
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                        echo "<option selected value='" . $row['name_operator'] . "'>" . $row['name_operator'] . "</option>";
-                                    }
-                                    ?>
+                            ?>
                             </select>
-                            <input readonly type="text" id="bashnya_comment" style="width:60%;" class="form-control form-control-sm mt-1" placeholder="введите комментарий" ></input>
+                            <input readonly type="text" id="bashnya_comment" style="width:60%;" class="form-control form-control-sm mt-1" placeholder="..." ></input>
 <!-- ____________________________________________________________________________________________________________________________________________________________________________________________________ -->
                             <label readonly for="gazgen" style="width:10%; font-size:12px;" class="mt-2">Газогенерация, %</label>
                             <label readonly for="gazgen_trek" style="width:15%; font-size:12px;" class="mt-2">количество переходов, шт</label>
@@ -401,23 +328,16 @@ $a = $_SESSION['login'];
                             <input readonly value="0" min="0" max="100" type="number" id="gazgen_trek" style="width:15%;" class="form-control form-control-sm mt-1" placeholder="количество переходов" required>
                             <select style="width:15%;" id="gazgen_user" class="form-select mt-1" aria-label="Default select example" autocomplete="on">
                             <?php
-                                    require($_SERVER['DOCUMENT_ROOT'].'/Engels/connect_db.php');
-                                    $message = "SELECT name_operator FROM gazgen WHERE name_operator <> '' ORDER BY date DESC LIMIT 1";
-                                    $link->set_charset("utf8");
-                                    $result = mysqli_query($link, $message);
-
                                     $message_all = "SELECT * FROM operator";
                                     $link->set_charset("utf8");
                                     $result_all = mysqli_query($link, $message_all);
-                                    while ($row_all = mysqli_fetch_assoc($result_all)) {
-                                        echo "<option value='" . $row_all['name'] . "'>" . $row_all['name'] . "</option>";
+                                    while ($row_all = mysqli_fetch_assoc($result_all)) 
+                                    {
+                                        echo "<option value='" . $row_all['id'] . "'>" . $row_all['name'] . "</option>";
                                     }
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                        echo "<option selected value='" . $row['name_operator'] . "'>" . $row['name_operator'] . "</option>";
-                                    }
-                                    ?>
+                            ?>
                             </select>
-                            <input readonly type="text" id="gazgen_comment" style="width:60%;" class="form-control form-control-sm mt-1" placeholder="введите комментарий" ></input>
+                            <input readonly type="text" id="gazgen_comment" style="width:60%;" class="form-control form-control-sm mt-1" placeholder="..." ></input>
 <!-- ____________________________________________________________________________________________________________________________________________________________________________________________________ -->
                             <label readonly for="prigotovlenie" style="width:10%; font-size:12px;" class="mt-2">Приготовление, %</label>
                             <label readonly for="prigotovlenie_trek" style="width:15%; font-size:12px;" class="mt-2">количество переходов, шт</label>
@@ -428,23 +348,16 @@ $a = $_SESSION['login'];
                             <input readonly value="0" min="0" max="100" type="number" id="prigotovlenie_trek" style="width:15%;" class="form-control form-control-sm mt-1" placeholder="количество переходов" required>
                             <select style="width:15%;" id="prigotovlenie_user" class="form-select mt-1" aria-label="Default select example" autocomplete="on">
                             <?php
-                                    require($_SERVER['DOCUMENT_ROOT'].'/Engels/connect_db.php');
-                                    $message = "SELECT name_operator FROM prigotovlenie WHERE name_operator <> '' ORDER BY date DESC LIMIT 1";
-                                    $link->set_charset("utf8");
-                                    $result = mysqli_query($link, $message);
-
                                     $message_all = "SELECT * FROM operator";
                                     $link->set_charset("utf8");
                                     $result_all = mysqli_query($link, $message_all);
-                                    while ($row_all = mysqli_fetch_assoc($result_all)) {
-                                        echo "<option value='" . $row_all['name'] . "'>" . $row_all['name'] . "</option>";
+                                    while ($row_all = mysqli_fetch_assoc($result_all)) 
+                                    {
+                                        echo "<option value='" . $row_all['id'] . "'>" . $row_all['name'] . "</option>";
                                     }
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                        echo "<option selected value='" . $row['name_operator'] . "'>" . $row['name_operator'] . "</option>";
-                                    }
-                                    ?>
+                            ?>
                             </select>
-                            <input readonly type="text" id="prigotovlenie_comment" style="width:60%;" class="form-control form-control-sm mt-1" placeholder="введите комментарий" ></input>
+                            <input readonly type="text" id="prigotovlenie_comment" style="width:60%;" class="form-control form-control-sm mt-1" placeholder="..." ></input>
 <!-- ____________________________________________________________________________________________________________________________________________________________________________________________________ -->
                             <label readonly for="postdobavki" style="width:10%; font-size:12px;" class="mt-2">Постдобавки, %</label>
                             <label readonly for="postdobavki_trek" style="width:15%; font-size:12px;" class="mt-2">количество переходов, шт</label>
@@ -455,23 +368,16 @@ $a = $_SESSION['login'];
                             <input readonly value="0" min="0" max="100" type="number" id="postdobavki_trek" style="width:15%;" class="form-control form-control-sm mt-1" placeholder="количество переходов" required>
                             <select style="width:15%;" id="postdobavki_user" class="form-select mt-1" aria-label="Default select example" autocomplete="on">
                             <?php
-                                    require($_SERVER['DOCUMENT_ROOT'].'/Engels/connect_db.php');
-                                    $message = "SELECT name_operator FROM postdobavki WHERE name_operator <> '' ORDER BY date DESC LIMIT 1";
-                                    $link->set_charset("utf8");
-                                    $result = mysqli_query($link, $message);
-
                                     $message_all = "SELECT * FROM operator";
                                     $link->set_charset("utf8");
                                     $result_all = mysqli_query($link, $message_all);
-                                    while ($row_all = mysqli_fetch_assoc($result_all)) {
-                                        echo "<option value='" . $row_all['name'] . "'>" . $row_all['name'] . "</option>";
+                                    while ($row_all = mysqli_fetch_assoc($result_all)) 
+                                    {
+                                        echo "<option value='" . $row_all['id'] . "'>" . $row_all['name'] . "</option>";
                                     }
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                        echo "<option selected value='" . $row['name_operator'] . "'>" . $row['name_operator'] . "</option>";
-                                    }
-                                    ?>
+                            ?>
                             </select>
-                            <input readonly type="text" id="postdobavki_comment" style="width:60%;" class="form-control form-control-sm mt-1" placeholder="введите комментарий" ></input>
+                            <input readonly type="text" id="postdobavki_comment" style="width:60%;" class="form-control form-control-sm mt-1" placeholder="..." ></input>
 <!-- ____________________________________________________________________________________________________________________________________________________________________________________________________ -->
                         </div>
                         </div>
@@ -524,7 +430,7 @@ $a = $_SESSION['login'];
                             var innotech1_trek = document.getElementById('innotech1_trek').value;
                             var innotech1_user = document.getElementById('innotech1_user').value;
                             var innotech1_comment = document.getElementById('innotech1_comment').value;
-
+                            
                             var innotech2 = document.getElementById('innotech2').value;
                             var innotech2_trek = document.getElementById('innotech2_trek').value;
                             var innotech2_user = document.getElementById('innotech2_user').value;
@@ -573,62 +479,62 @@ $a = $_SESSION['login'];
 
                             var postdobavki = document.getElementById('postdobavki').value;
                             var postdobavki_user = document.getElementById('postdobavki_user').value;
-                            $.ajax(
-                                {
-                                    type: 'POST',
-                                    dataType: 'html',
-                                    url: '/Engels/production/addProduction.php',
-                                    data:
-                                    {
-                                        user:user,
-                                        dateTime:dateTime,
-                                        team:team,
+                            // $.ajax(
+                            //     {
+                            //         type: 'POST',
+                            //         dataType: 'html',
+                            //         url: '/Engels/production/addProduction.php',
+                            //         data:
+                            //         {
+                            //             user:user,
+                            //             dateTime:dateTime,
+                            //             team:team,
 
-                                        plan_team:plan_team,
-                                        fact_team:fact_team,
-                                        deviation:deviation,
-                                        oee_total:oee_total,
-                                        OEE_team:OEE_team,
+                            //             plan_team:plan_team,
+                            //             fact_team:fact_team,
+                            //             deviation:deviation,
+                            //             oee_total:oee_total,
+                            //             OEE_team:OEE_team,
 
-                                        innotech1:innotech1,
-                                        innotech1_trek:innotech1_trek,
-                                        innotech1_user:innotech1_user,
-                                        innotech1_comment:innotech1_comment,
+                            //             innotech1:innotech1,
+                            //             innotech1_trek:innotech1_trek,
+                            //             innotech1_user:innotech1_user,
+                            //             innotech1_comment:innotech1_comment,
 
-                                        innotech2:innotech2,
-                                        innotech2_trek:innotech2_trek,
-                                        innotech2_user:innotech2_user,
-                                        innotech2_comment:innotech2_comment,
+                            //             innotech2:innotech2,
+                            //             innotech2_trek:innotech2_trek,
+                            //             innotech2_user:innotech2_user,
+                            //             innotech2_comment:innotech2_comment,
 
-                                        innotech3:innotech3,
-                                        innotech3_trek:innotech3_trek,
-                                        innotech3_user:innotech3_user,
-                                        innotech3_comment:innotech3_comment,
+                            //             innotech3:innotech3,
+                            //             innotech3_trek:innotech3_trek,
+                            //             innotech3_user:innotech3_user,
+                            //             innotech3_comment:innotech3_comment,
 
-                                        uva4:uva4,
-                                        uva4_trek:uva4_trek,
-                                        uva4_user:uva4_user,
-                                        uva4_comment:uva4_comment,
+                            //             uva4:uva4,
+                            //             uva4_trek:uva4_trek,
+                            //             uva4_user:uva4_user,
+                            //             uva4_comment:uva4_comment,
 
-                                        uva5:uva5,
-                                        uva5_trek:uva5_trek,
-                                        uva5_user:uva5_user,
-                                        uva5_comment:uva5_comment,
+                            //             uva5:uva5,
+                            //             uva5_trek:uva5_trek,
+                            //             uva5_user:uva5_user,
+                            //             uva5_comment:uva5_comment,
 
-                                        acma:acma,
-                                        acma_trek:acma_trek,
-                                        acma_user:acma_user,
-                                        acma_comment:acma_comment
-                                    },
-                                    success: function(response)
-                                    {
+                            //             acma:acma,
+                            //             acma_trek:acma_trek,
+                            //             acma_user:acma_user,
+                            //             acma_comment:acma_comment
+                            //         },
+                            //         success: function(response)
+                            //         {
                                       
-                                    },
-                                    error: function(xhr, status, error)
-                                    {
-                                        alert("Error: " + error);
-                                    }
-                                });
+                            //         },
+                            //         error: function(xhr, status, error)
+                            //         {
+                            //             alert("Error: " + error);
+                            //         }
+                            //     });
                                 $.ajax(
                                 {
                                     type: 'POST',
@@ -760,6 +666,7 @@ $a = $_SESSION['login'];
                                 });
                                 $.ajax(
                                 {
+                                    
                                     type: 'POST',
                                     dataType: 'html',
                                     url: '/Engels/production/addshrink.php',

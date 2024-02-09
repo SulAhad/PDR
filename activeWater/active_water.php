@@ -108,16 +108,16 @@ $a = $_SESSION['login'];
                                 success: function(response)
                                 {
                                     var data = JSON.parse(response);
-                                    w1:w1.value = "0";
-                                    w2:w2.value = "0";
-                                    w3:w3.value = "0";
-                                    w4:w4.value = "0";
-                                    w5:w5.value = "0";
-                                    w6:w6.value = "0";
-                                    w7:w7.value = "0";
-                                    w8:w8.value = "0";
-                                    w9:w9.value = "0";
-                                    w10:w10.value = "0";
+                                    w1:w1.value = "";
+                                    w2:w2.value = "";
+                                    w3:w3.value = "";
+                                    w4:w4.value = "";
+                                    w5:w5.value = "";
+                                    w6:w6.value = "";
+                                    w7:w7.value = "";
+                                    w8:w8.value = "";
+                                    w9:w9.value = "";
+                                    w10:w10.value = "";
                                     $('.alert-success').fadeIn(1000).delay(3000).fadeOut(1000);
                                     // Имитируем успешное сохранение данных с помощью задержки setTimeout
                                     setTimeout(function(){

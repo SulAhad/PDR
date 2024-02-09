@@ -1,16 +1,16 @@
 <?php
     require($_SERVER['DOCUMENT_ROOT'].'/Engels/connect_db.php');
     $date = date("Y-m-d H:i:s");
-    $w1 = htmlspecialchars($_POST['w1']);
-    $w2 = htmlspecialchars($_POST['w2']);
-    $w3 = htmlspecialchars($_POST['w3']);
-    $w4 = htmlspecialchars($_POST['w4']);
-    $w5 = htmlspecialchars($_POST['w5']);
-    $w6 = htmlspecialchars($_POST['w6']);
-    $w7 = htmlspecialchars($_POST['w7']);
-    $w8 = htmlspecialchars($_POST['w8']);
-    $w9 = htmlspecialchars($_POST['w9']);
-    $w10 = htmlspecialchars($_POST['w10']);
+    $w1 = empty($_POST['w1']) ? 0 : htmlspecialchars($_POST['w1']);
+    $w2 = empty($_POST['w2']) ? 0 : htmlspecialchars($_POST['w2']);
+    $w3 = empty($_POST['w3']) ? 0 : htmlspecialchars($_POST['w3']);
+    $w4 = empty($_POST['w4']) ? 0 : htmlspecialchars($_POST['w4']);
+    $w5 = empty($_POST['w5']) ? 0 : htmlspecialchars($_POST['w5']);
+    $w6 = empty($_POST['w6']) ? 0 : htmlspecialchars($_POST['w6']);
+    $w7 = empty($_POST['w7']) ? 0 : htmlspecialchars($_POST['w7']);
+    $w8 = empty($_POST['w8']) ? 0 : htmlspecialchars($_POST['w8']);
+    $w9 = empty($_POST['w9']) ? 0 : htmlspecialchars($_POST['w9']);
+    $w10 = empty($_POST['w10']) ? 0 : htmlspecialchars($_POST['w10']);
     $user = htmlspecialchars($_POST['user']);
     $date = htmlspecialchars($_POST['date']);
     $link->set_charset("utf8");

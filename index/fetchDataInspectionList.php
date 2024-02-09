@@ -17,15 +17,15 @@ echo "<table>"; // Add table tag
     while($row = mysqli_fetch_assoc($result))
     {
         echo"<tr class='trIndex col-1'>";
-            echo"<td class='td_Index'><p>количество обходов</p></td>";
+            echo"<td class='td_Index'><p>Количество замечаний после обходов</p></td>";
             echo"<td class='col-8 td_Index'>";
             if($row['count_name'] == 22) {
                 echo "<div class='progress'  style='height:15px;'>";
-                    echo "<div title='Количество обходов = ".$row['count_name']." шт.' class='progress-bar progress-bar-animated progress-bar-striped bg-success' role='progressbar' style='width: " . round($row['count_name'] / 22 * 100, 2) . "%' aria-valuenow='" . round($row['count_name'], 2) . "' aria-valuemin='0' aria-valuemax='22'>$row[count_name]</div>";
+                    echo "<div title='Количество замечаний после обходов = ".$row['count_name']." шт.' class='progress-bar progress-bar-animated progress-bar-striped bg-success' role='progressbar' style='width: " . round($row['count_name'] / 22 * 100, 2) . "%' aria-valuenow='" . round($row['count_name'], 2) . "' aria-valuemin='0' aria-valuemax='22'>$row[count_name]</div>";
                 echo "</div>";
             } else {
                 echo "<div class='progress'  style='height:15px;'>";
-                    echo "<div title='Количество обходов = ".$row['count_name']." шт.' class='progress-bar progress-bar-animated progress-bar-striped bg-danger' role='progressbar' style='width: " . round($row['count_name'] / 22 * 100, 2) . "%' aria-valuenow='" . round($row['count_name'], 2) . "' aria-valuemin='0' aria-valuemax='22'>$row[count_name]</div>";
+                    echo "<div title='Количество замечаний после обходов = ".$row['count_name']." шт.' class='progress-bar progress-bar-animated progress-bar-striped bg-danger' role='progressbar' style='width: " . round($row['count_name'] / 22 * 100, 2) . "%' aria-valuenow='" . round($row['count_name'], 2) . "' aria-valuemin='0' aria-valuemax='22'>$row[count_name]</div>";
                 echo "</div>";
             }
             echo "</td>";

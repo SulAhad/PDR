@@ -210,7 +210,7 @@ $a = $_SESSION['login'];
                                     </tr>
                                 </thead>
                                 <tbody id="tbodyRed" onload="myFunction()" class="animate-bottom">
-                                    <?php $message = "SELECT * FROM InspectionList ORDER BY date DESC LIMIT 25";
+                                    <?php $message = "SELECT * FROM InspectionList ORDER BY id DESC LIMIT 25";
                                     $link->set_charset("utf8");
                                     $result = mysqli_query($link, $message);
                                     while ($row = mysqli_fetch_assoc($result)) {
@@ -233,9 +233,9 @@ $a = $_SESSION['login'];
                                             echo "<td><textarea type='text' class='fontTr form-control form-control-sm border-0' id='input_comment' value='$row[comment]' >$row[comment]</textarea></td>";
                                             echo "<td><input onclick='return false;' type='checkbox' class='fontTr form-check-input' id='input_intervention1' value='$row[intervention1]' " . ($row['intervention1'] == 1 ? 'checked' : 'unchecked') . " ></td>";
                                             echo "<td><input onclick='return false;' type='checkbox' class='fontTr form-check-input' id='input_intervention2' value='$row[intervention2]' " . ($row['intervention2'] == 1 ? 'checked' : 'unchecked') . " ></td>";
-                                            echo "<td><input style='width:50px;' type='number' class='fontTr form-control form-control-sm border-0' id='input_duration' value='$row[duration]' ></input></td>";
-                                            echo "<td><input type='number' class='fontTr form-control form-control-sm border-0' id='input_staff' value='$row[staff]' ></input></td>";
-                                            echo "<td><input type='number' class='fontTr form-control form-control-sm border-0' id='input_contract' value='$row[contract]' ></input></td>";
+                                            echo "<td><input min='10' style='width:50px;' type='number' class='fontTr form-control form-control-sm border-0' id='input_duration' value='$row[duration]' ></input></td>";
+                                            echo "<td><input min='0' type='number' class='fontTr form-control form-control-sm border-0' id='input_staff' value='$row[staff]' ></input></td>";
+                                            echo "<td><input min='0' type='number' class='fontTr form-control form-control-sm border-0' id='input_contract' value='$row[contract]' ></input></td>";
                                             echo "<td><input type='text' class='fontTr form-control form-control-sm border-0' id='input_production' value='$row[production]' ></input></td>";
                                             echo "<td><input type='text' class='fontTr form-control form-control-sm border-0' id='input_area' value='$row[area]' ></input></td>";
                                             echo "<td><button type='button' class='updateInspection btn btn-outline btn-sm btn-light' value='$row[id]'><img src='/Engels/icons/change.jpg' style='height:16px;'></button></td>";

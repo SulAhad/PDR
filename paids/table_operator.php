@@ -6,8 +6,11 @@
                 <tr>
                     <th class="col-1">Дата</th>
                     <th class="col-1">Смена</th>
+                    <th class="col-1">id</th>
+                    <th class="col-1">автомат</th>
                     <th class="col-4">ФИО</th>
                     <th class="col-1">OEE, %</th>
+                    <th class="col-1">премия, %</th>
                     <th class="col-4">Комментарий по качеству</th>
                     <th class="col-1">Замечания по упаковке</th>
                     <th class="col-1">Претензии</th>
@@ -26,8 +29,11 @@
                         echo"<tr>";
                         echo"<td><input id='date_$name' class='form-control form-control-sm border-0' type='date' value='$row[date]'></input></td>";
                         echo"<td><input id='team_$name' class='form-control form-control-sm border-0' type='text' value='$row[team]'></input></td>";
+                        echo"<td><input id='id_user_$name' class='form-control form-control-sm border-0' type='text' value='$row[id_user]'></input></td>";
+                        echo"<td><input id='name_avtomat_$name' class='form-control form-control-sm border-0' type='text' value='$row[name_avtomat]'></input></td>";
                         echo"<td><input id='name_operator_$name' class='form-control form-control-sm border-0' type='text' value='$row[name_operator]'></input></td>";
                         echo"<td><input id='oee_$name' type='number' class='border-0 form-control form-control-sm' value='$row[oee]'></input></td>";
+                        echo"<td><input id='percent_$name' type='number' class='border-0 form-control form-control-sm' value='$row[percent]'></input></td>";
                         echo"<td><input id='comment_$name' type='text' class='border-0 form-control form-control-sm' value='$row[comment]'></input></td>";
                         echo"<td><input id='quality1_$name' type='number' class='border-0 form-control form-control-sm' value='$row[quality1]'></input></td>";
                         echo"<td><input id='quality2_$name' type='number' class='border-0 form-control form-control-sm' value='$row[quality2]'></input></td>";
@@ -40,6 +46,21 @@
             </tbody>
         </div>
     </table>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Подтвердите удаление</h4>
+            </div>
+            <div class="modal-body">
+                Вы действительно хотите удалить эту запись?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="confirmDelete">Удалить</button>
+            </div>
+        </div>
+    </div>
+</div>
 </fieldset>
 <script>
     $(document).ready
@@ -49,8 +70,11 @@
         var id = $(this).val();
         var date = $(this).closest("tr").find("#date_<?php echo$name ?>").val();
         var team = $(this).closest("tr").find("#team_<?php echo$name ?>").val();
+        var id_user = $(this).closest("tr").find("#id_user_<?php echo$name ?>").val();
+        var name_avtomat = $(this).closest("tr").find("#name_avtomat_<?php echo$name ?>").val();
         var name_operator = $(this).closest("tr").find("#name_operator_<?php echo$name ?>").val();
         var oee = $(this).closest("tr").find("#oee_<?php echo$name ?>").val();
+        var percent = $(this).closest("tr").find("#percent_<?php echo$name ?>").val();
         var comment = $(this).closest("tr").find("#comment_<?php echo$name ?>").val();
         var quality1 = $(this).closest("tr").find("#quality1_<?php echo$name ?>").val();
         var quality2 = $(this).closest("tr").find("#quality2_<?php echo$name ?>").val();
@@ -64,8 +88,11 @@
                     avtomat:avtomat,
                     date:date,
                     team:team,
+                    id_user:id_user,
+                    name_avtomat:name_avtomat,
                     name:name_operator,
                     oee:oee,
+                    percent:percent,
                     comment:comment,
                     quality1:quality1,
                     quality2:quality2,
@@ -87,23 +114,26 @@
 </script>
 <script>
     $(document).ready(function() {
-        $(".delete_<?php echo$name ?>").click(function() {
+    $(".delete_<?php echo $name ?>").click(function() {
         var deleteUser = $(this).val();
         var avtomat = '<?php echo $name ?>';
-        var row = $(this).closest("tr"); // получаем строку таблицы, которую нужно удалить
-        $.ajax({
-            type: 'POST',
-            dataType: 'html',
-            url: '/Engels/paids/delete.php',
-            data: {
-                avtomat:avtomat,
-                idUser: deleteUser},
-            success: function(response) {
-            var data = JSON.parse(response);
-            row.remove(); // удаляем строку таблицы
-            $('.alert-success_Delete').fadeIn(1000).delay(3000).fadeOut(1000);
-            }
-        });
-        });
+        var row = $(this).closest("tr");
+        if (confirm("Вы действительно хотите удалить?")) {
+            $.ajax({
+                type: 'POST',
+                dataType: 'html',
+                url: '/Engels/paids/delete.php',
+                data: {
+                    avtomat: avtomat,
+                    idUser: deleteUser
+                },
+                success: function(response) {
+                    var data = JSON.parse(response);
+                    row.remove();
+                    $('.alert-success_Delete').fadeIn(1000).delay(3000).fadeOut(1000);
+                }
+            });
+        };
     });
+});
 </script>

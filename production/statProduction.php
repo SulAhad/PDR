@@ -24,23 +24,51 @@ $a = $_SESSION['login'];
                                 <th>План, т</th>
                                 <th>Факт, т</th>
                                 <th>Отклонение, т</th>
+                                <th>Отклонение, %</th>
+                                <th>Брак, т</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                            $message = "SELECT MONTH(datetime) AS date, ROUND(SUM(plan_team), 3) as plan, ROUND(SUM(fact_team), 3) as fact, ROUND(SUM(deviation), 3) as deviation FROM productionsms GROUP BY date";
-                            $link->set_charset("utf8");
-                            $result = mysqli_query($link, $message);
-                            while ($row = mysqli_fetch_assoc($result))
-                            {
-                                echo "<tr>";
-                                echo "<td>" . $row['date'] . "</td>";
-                                echo "<td>" . $row['plan'] . "</td>";
-                                
-                                echo "<td>" . $row['fact'] . "</td>";
-                                echo "<td>" . $row['deviation'] . "</td>";
-                                echo "</tr>";
-                            }
+                        <?php
+
+                                $message = "SELECT 
+                                CASE 
+                                    WHEN MONTH(p.datetime) = 1 THEN 'январь'
+                                    WHEN MONTH(p.datetime) = 2 THEN 'февраль'
+                                    WHEN MONTH(p.datetime) = 3 THEN 'март'
+                                    WHEN MONTH(p.datetime) = 4 THEN 'апрель'
+                                    WHEN MONTH(p.datetime) = 5 THEN 'май'
+                                    WHEN MONTH(p.datetime) = 6 THEN 'июнь'
+                                    WHEN MONTH(p.datetime) = 7 THEN 'июль'
+                                    WHEN MONTH(p.datetime) = 8 THEN 'август'
+                                    WHEN MONTH(p.datetime) = 9 THEN 'сентябрь'
+                                    WHEN MONTH(p.datetime) = 10 THEN 'октябрь'
+                                    WHEN MONTH(p.datetime) = 11 THEN 'ноябрь'
+                                    WHEN MONTH(p.datetime) = 12 THEN 'декабрь'
+                                END AS date,
+                                ROUND(SUM(p.plan_team), 3) as plan, 
+                                ROUND(SUM(p.fact_team), 3) as fact, 
+                                ROUND((SUM(p.fact_team) - SUM(p.plan_team)) / SUM(p.plan_team) * 100, 2) as deviation_pct,
+                                q.total_requests
+                            FROM productionsms p
+                            JOIN (
+                                SELECT MONTH(date) AS month, ROUND(SUM(BrakQuality), 3) AS total_requests
+                                FROM Quality_KPI
+                                GROUP BY MONTH(date)
+                            ) q ON MONTH(p.datetime) = q.month
+                            GROUP BY MONTH(p.datetime)";
+                                $link->set_charset("utf8");
+                                $result = mysqli_query($link, $message);
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    echo "<tr>";
+                                    echo "<td>" . $row['date'] . "</td>";
+                                    echo "<td>" . $row['plan'] . "</td>";
+                                    echo "<td>" . $row['fact'] . "</td>";
+                                    echo "<td>" . ($row['fact'] - $row['plan']) . "</td>";
+                                    echo "<td>" . $row['deviation_pct'] . " %" . "</td>";
+                                    echo "<td>" . $row['total_requests'] . " т" . "</td>";
+                                    echo "</tr>";
+                                }
                             ?>
                         </tbody>
                     </table>
@@ -57,24 +85,23 @@ $a = $_SESSION['login'];
                                 <table class="table table-hover table-sm">
                                     <thead>
                                         <tr>
-                                            <th>Неделя</th>
+                                            <th>Календарная неделя</th>
                                             <th>План, т</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php
-                                        $message = "SELECT WEEK(datetime) as week_num, ROUND(SUM(plan_team), 3) as total_plan FROM productionsms GROUP BY week_num;";
+                                    <?php
+                                        $message = "SELECT WEEK(datetime, 1) as calendar_week, ROUND(SUM(plan_team), 3) as total_plan FROM productionsms GROUP BY calendar_week;";
                                         $link->set_charset("utf8");
                                         $result = mysqli_query($link, $message);
                                         while ($row = mysqli_fetch_assoc($result))
                                         {
                                             echo "<tr>";
-                                            echo "<td>" . $row['week_num'] . "</td>";
+                                            echo "<td>" . $row['calendar_week'] . "</td>";
                                             echo "<td>" . $row['total_plan'] . "</td>";
-                                            
                                             echo "</tr>";
                                         }
-                                        ?>
+                                    ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -86,19 +113,19 @@ $a = $_SESSION['login'];
                                 <table class="table table-hover table-sm">
                                     <thead>
                                         <tr>
-                                            <th>Неделя</th>
+                                            <th>Календарная неделя</th>
                                             <th>Факт, т</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $message = "SELECT WEEK(datetime) as week_num, ROUND(SUM(fact_team), 3) as total_fact FROM productionsms GROUP BY week_num;";
+                                        $message = "SELECT WEEK(datetime, 1) as calendar_week, ROUND(SUM(fact_team), 3) as total_fact FROM productionsms GROUP BY calendar_week;";
                                         $link->set_charset("utf8");
                                         $result = mysqli_query($link, $message);
                                         while ($row = mysqli_fetch_assoc($result))
                                         {
                                             echo "<tr>";
-                                            echo "<td>" . $row['week_num'] . "</td>";
+                                            echo "<td>" . $row['calendar_week'] . "</td>";
                                             echo "<td>" . $row['total_fact'] . "</td>";
                                             echo "</tr>";
                                         }
